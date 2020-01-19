@@ -11,6 +11,8 @@ import com.cinematica.model.Pessoa;
 @Mapper(componentModel="spring")
 public interface PessoaMapper {
 
-    PessoaDTO toPessoaDTO(Pessoa pessoa); 
+    PessoaDTO toPessoaDTO(Pessoa entidade); 
+    
+    Pessoa toPessoa(PessoaDTO entidadeDTO); 
     
 }

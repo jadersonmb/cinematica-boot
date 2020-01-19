@@ -11,6 +11,8 @@ import com.cinematica.model.Horario;
 @Mapper(componentModel="spring")
 public interface HorarioMapper {
 
-    HorarioDTO toHorarioDTO(Horario horario); 
+    HorarioDTO toHorarioDTO(Horario entidade);
+    
+    Horario toHorario(HorarioDTO entidadeDTO); 
     
 }

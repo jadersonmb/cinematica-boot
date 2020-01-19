@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.cinematica.dto.UsuarioDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.UsuarioException;
 import com.cinematica.interfaces.services.UsuarioService;
@@ -53,9 +54,9 @@ public class UsuarioResourse implements Serializable {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> salvar(@RequestBody Usuario entidade) {
-        Usuario usuario = usuarioService.salvar(entidade);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getId()).toUri();
-        return ResponseEntity.created(uri).body(usuario);
+        UsuarioDTO usuarioDTO = usuarioService.salvar(entidade);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuarioDTO.getId()).toUri();
+        return ResponseEntity.created(uri).body(usuarioDTO);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)

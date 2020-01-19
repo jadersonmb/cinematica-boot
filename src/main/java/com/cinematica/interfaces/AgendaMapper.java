@@ -11,6 +11,8 @@ import com.cinematica.model.Agenda;
 @Mapper(componentModel="spring")
 public interface AgendaMapper {
 
-	AgendaDTO toAgendaDTO(Agenda agenda);
+	AgendaDTO toAgendaDTO(Agenda entidade);
+	
+	Agenda toAgenda(AgendaDTO entidadeDTO);
 	
 }

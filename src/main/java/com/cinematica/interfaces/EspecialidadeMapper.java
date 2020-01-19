@@ -1,7 +1,6 @@
 package com.cinematica.interfaces;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 import com.cinematica.dto.EspecialidadeDTO;
 import com.cinematica.model.Especialidade;
@@ -12,9 +11,7 @@ import com.cinematica.model.Especialidade;
 @Mapper(componentModel = "spring")
 public interface EspecialidadeMapper {
 	
-	EspecialidadeMapper INSTANCE = Mappers.getMapper( EspecialidadeMapper.class );
-
-    EspecialidadeDTO toEspecialidadeDTO(Especialidade especialidade); 
+    EspecialidadeDTO toEspecialidadeDTO(Especialidade entidade); 
     
-    Especialidade toEspecialidade(EspecialidadeDTO especialidadeDTO);
+    Especialidade toEspecialidade(EspecialidadeDTO entidadeDTO);
 }

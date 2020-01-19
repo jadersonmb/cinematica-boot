@@ -13,7 +13,7 @@ import com.cinematica.model.Empresa;
 @Mapper(componentModel="spring")
 public interface EmpresaMapper {
 	
-    EmpresaDTO toEmpresaDTO(Empresa empresa); 
+    EmpresaDTO toEmpresaDTO(Empresa entidade); 
     
-    Empresa toEmpresa(EmpresaDTO empresaDTO);
+    Empresa toEmpresa(EmpresaDTO entidadeDTO);
 }

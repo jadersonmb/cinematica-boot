@@ -7,7 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cinematica.dto.UsuarioDTO;
 import com.cinematica.exception.UsuarioException;
+import com.cinematica.interfaces.UsuarioMapper;
 import com.cinematica.interfaces.services.UsuarioService;
 import com.cinematica.model.Usuario;
 import com.cinematica.repository.UsuarioRepository;
@@ -22,14 +24,18 @@ public class UsuarioServiceImpl implements UsuarioService, Serializable {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioMapper mapper;
+    
 
     public Usuario consultarPorId(Integer id) throws UsuarioException {
         Optional<Usuario> obj = usuarioRepository.findById(id);
         return obj.orElseThrow(() -> new UsuarioException("Pessoa não Encontrada"));
     }
 
-    public Usuario salvar(Usuario entidade) throws UsuarioException {
-        return usuarioRepository.save(entidade);
+    public UsuarioDTO salvar(Usuario entidade) throws UsuarioException {
+        Usuario usuario = usuarioRepository.save(entidade);
+        return mapper.toUsuarioDTO(usuario);
     }
 
     public void delete(Usuario entidade) throws UsuarioException {
