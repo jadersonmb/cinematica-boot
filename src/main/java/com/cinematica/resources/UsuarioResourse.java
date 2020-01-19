@@ -1,13 +1,9 @@
 package com.cinematica.resources;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
-
-import com.cinematica.exception.CinematicaExceptionHandler.Erro;
-import com.cinematica.exception.UsuarioException;
-import com.cinematica.model.Usuario;
-import com.cinematica.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -20,6 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.cinematica.exception.CinematicaExceptionHandler.Erro;
+import com.cinematica.exception.UsuarioException;
+import com.cinematica.interfaces.services.UsuarioService;
+import com.cinematica.model.Usuario;
 
 /**
  * UsuarioResourse
@@ -52,7 +54,8 @@ public class UsuarioResourse implements Serializable {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> salvar(@RequestBody Usuario entidade) {
         Usuario usuario = usuarioService.salvar(entidade);
-        return ResponseEntity.ok().body(usuario);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getId()).toUri();
+        return ResponseEntity.created(uri).body(usuario);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)

@@ -9,99 +9,99 @@ import javax.validation.constraints.NotNull;
  */
 public class AgendaDTO {
 
-    private Long id;
-    @NotNull(message = "Campo Obrigatório")
-    private Date dataInicio;
-    @NotNull(message = "Campo Obrigatório")
-    private Date dataFim;
-    private PessoaDTO pessoa;
-    private PessoaDTO funcionario;
-    private boolean diaTodo;
-    private boolean falta;
-    private boolean cancelou;
-    @NotNull(message = "Campo Obrigatório")
-    private EspecialidadeDTO especialidade;
-    @NotNull(message = "Campo Obrigatório")
-    private HorarioDTO horario;
+	private Long id;
+	@NotNull(message = "Campo Obrigatório")
+	private Date dataInicio;
+	@NotNull(message = "Campo Obrigatório")
+	private Date dataFim;
+	private PessoaDTO pessoa;
+	private PessoaDTO funcionario;
+	private boolean diaTodo;
+	private boolean falta;
+	private boolean cancelou;
+	@NotNull(message = "Campo Obrigatório")
+	private EspecialidadeDTO especialidade;
+	@NotNull(message = "Campo Obrigatório")
+	private HorarioDTO horario;
 
-    public Long getId() {
-        return this.id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public HorarioDTO getHorario() {
-        return horario;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setHorario(HorarioDTO horario) {
-        this.horario = horario;
-    }
+	public Date getDataInicio() {
+		return dataInicio;
+	}
 
-    public EspecialidadeDTO getEspecialidade() {
-        return especialidade;
-    }
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
 
-    public void setEspecialidade(EspecialidadeDTO especialidade) {
-        this.especialidade = especialidade;
-    }
+	public Date getDataFim() {
+		return dataFim;
+	}
 
-    public PessoaDTO getFuncionario() {
-        return funcionario;
-    }
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
+	}
 
-    public void setFuncionario(PessoaDTO funcionario) {
-        this.funcionario = funcionario;
-    }
+	public PessoaDTO getPessoa() {
+		return pessoa;
+	}
 
-    public PessoaDTO getPessoa() {
-        return pessoa;
-    }
+	public void setPessoa(PessoaDTO pessoa) {
+		this.pessoa = pessoa;
+	}
 
-    public void setPessoa(PessoaDTO pessoa) {
-        this.pessoa = pessoa;
-    }
+	public PessoaDTO getFuncionario() {
+		return funcionario;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setFuncionario(PessoaDTO funcionario) {
+		this.funcionario = funcionario;
+	}
 
-    public Date getDataInicio() {
-        return this.dataInicio;
-    }
+	public boolean isDiaTodo() {
+		return diaTodo;
+	}
 
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
+	public void setDiaTodo(boolean diaTodo) {
+		this.diaTodo = diaTodo;
+	}
 
-    public Date getDataFim() {
-        return this.dataFim;
-    }
+	public boolean isFalta() {
+		return falta;
+	}
 
-    public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
-    }
+	public void setFalta(boolean falta) {
+		this.falta = falta;
+	}
 
-    public boolean getDiaTodo() {
-        return this.diaTodo;
-    }
+	public boolean isCancelou() {
+		return cancelou;
+	}
 
-    public void setDiaTodo(boolean diaTodo) {
-        this.diaTodo = diaTodo;
-    }
+	public void setCancelou(boolean cancelou) {
+		this.cancelou = cancelou;
+	}
 
-    public boolean getFalta() {
-        return this.falta;
-    }
+	public EspecialidadeDTO getEspecialidade() {
+		return especialidade;
+	}
 
-    public void setFalta(boolean falta) {
-        this.falta = falta;
-    }
+	public void setEspecialidade(EspecialidadeDTO especialidade) {
+		this.especialidade = especialidade;
+	}
 
-    public boolean getCancelou() {
-        return this.cancelou;
-    }
+	public HorarioDTO getHorario() {
+		return horario;
+	}
 
-    public void setCancelou(boolean cancelou) {
-        this.cancelou = cancelou;
-    }
-    
+	public void setHorario(HorarioDTO horario) {
+		this.horario = horario;
+	}
+
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.cinematica.dto.AgendaDTO;
 import com.cinematica.resources.AgendaResource;
-import com.cinematica.service.AgendaService;
+import com.cinematica.service.AgendaServiceImpl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,10 +21,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 /**
  * AgendaTest
  */
-public class AgendaTest extends DemoApplicationTests {
+public class AgendaTest extends CinematicaApplicationTests {
 
     @Autowired
-    private AgendaService agendaService;
+    private AgendaServiceImpl agendaService;
     @Autowired
     private AgendaResource agendaResource;
     
@@ -37,7 +37,7 @@ public class AgendaTest extends DemoApplicationTests {
 
     @Test
     public void testGETbuscarPorID() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/agenda/68"))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/agendas/68"))
             .andExpect(MockMvcResultMatchers.status().isOk());
     }
     

@@ -5,32 +5,32 @@ package com.cinematica.dto;
  */
 public class HorarioDTO {
 
-    private Integer id;
-    private String horarioInicio;
-    private String horarioFim;
+	private Integer id;
+	private String horarioInicio;
+	private String horarioFim;
 
-    public Integer getId() {
-        return this.id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getHorarioInicio() {
-        return this.horarioInicio;
-    }
+	public String getHorarioInicio() {
+		return horarioInicio;
+	}
 
-    public void setHorarioInicio(String horarioInicio) {
-        this.horarioInicio = horarioInicio;
-    }
+	public void setHorarioInicio(String horarioInicio) {
+		this.horarioInicio = horarioInicio;
+	}
 
-    public String getHorarioFim() {
-        return this.horarioFim;
-    }
+	public String getHorarioFim() {
+		return horarioFim;
+	}
 
-    public void setHorarioFim(String horarioFim) {
-        this.horarioFim = horarioFim;
-    }
+	public void setHorarioFim(String horarioFim) {
+		this.horarioFim = horarioFim;
+	}
 
 }

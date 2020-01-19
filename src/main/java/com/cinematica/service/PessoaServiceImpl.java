@@ -4,26 +4,26 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-import com.cinematica.dto.PessoaDTO;
-import com.cinematica.exception.PessoaException;
-import com.cinematica.interfaces.PessoaMapper;
-import com.cinematica.model.Pessoa;
-import com.cinematica.repository.PessoaRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.cinematica.dto.PessoaDTO;
+import com.cinematica.exception.PessoaException;
+import com.cinematica.interfaces.mapper.PessoaMapper;
+import com.cinematica.interfaces.services.PessoaService;
+import com.cinematica.model.Pessoa;
+import com.cinematica.repository.PessoaRepository;
 
 /**
  * PessoaService
  */
 @Service
-public class PessoaService implements Serializable {
+public class PessoaServiceImpl implements PessoaService, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Autowired
     private PessoaRepository pessoaRepository;
-    @Autowired
     private PessoaMapper mapper;
 
     public List<Pessoa> listarTodos() {
@@ -48,6 +48,6 @@ public class PessoaService implements Serializable {
     }
 
     public PessoaDTO toDTO (Pessoa entidade){
-        return mapper.pessoaToPessoaDTO(entidade);
+        return mapper.toPessoaDTO(entidade);
     }
 }

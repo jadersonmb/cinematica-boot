@@ -5,31 +5,32 @@ package com.cinematica.dto;
  */
 public class EspecialidadeDTO {
 
-    private Integer id;
-    private String descricao;
-    private String ativo;
+	private Integer id;
+	private String descricao;
+	private String ativo;
 
-    public String getDescricao() {
-        return this.descricao;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getAtivo() {
-        return this.ativo;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setAtivo(String ativo) {
-        this.ativo = ativo;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getAtivo() {
+		return ativo;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
+	}
+
 }

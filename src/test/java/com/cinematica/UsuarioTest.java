@@ -7,8 +7,8 @@ import java.util.Date;
 import com.cinematica.model.Pessoa;
 import com.cinematica.model.SimNao;
 import com.cinematica.model.Usuario;
-import com.cinematica.service.PessoaService;
-import com.cinematica.service.UsuarioService;
+import com.cinematica.service.PessoaServiceImpl;
+import com.cinematica.service.UsuarioServiceImpl;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,12 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * UsuarioTest
  */
-public class UsuarioTest extends DemoApplicationTests {
+public class UsuarioTest extends CinematicaApplicationTests {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioServiceImpl usuarioService;
     @Autowired
-    private PessoaService pessoaService;
+    private PessoaServiceImpl pessoaService;
 
 
     @Test

@@ -5,28 +5,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.cinematica.dto.AgendaDTO;
 import com.cinematica.exception.AgendaException;
-import com.cinematica.interfaces.AgendaMapper;
+import com.cinematica.interfaces.mapper.AgendaMapper;
+import com.cinematica.interfaces.services.AgendaService;
 import com.cinematica.model.Agenda;
 import com.cinematica.repository.AgendaRepository;
-
-import org.jvnet.hk2.annotations.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * AgendaService
  */
 @Service
-@Component
-public class AgendaService implements Serializable {
+public class AgendaServiceImpl implements AgendaService, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Autowired
     private AgendaRepository agendaRepository;
-    @Autowired
     private AgendaMapper mapper;
 
     public Agenda buscarAgendaPorIdPaciente(Long id) throws AgendaException {

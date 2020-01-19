@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.cinematica.model.Pessoa;
 import com.cinematica.resources.PessoaResource;
-import com.cinematica.service.PessoaService;
+import com.cinematica.service.PessoaServiceImpl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,12 +20,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 /**
  * PessoaTest
  */
-public class PessoaTest extends DemoApplicationTests {
+public class PessoaTest extends CinematicaApplicationTests {
 
     @Autowired
     private PessoaResource pessoaResource;
     @Autowired
-    private PessoaService pessoaService;
+    private PessoaServiceImpl pessoaService;
 
     private MockMvc mockMvc;
 
@@ -36,12 +36,12 @@ public class PessoaTest extends DemoApplicationTests {
     
     @Test
 	public void testGETlistaTodosPaciente() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/paciente")).andExpect(MockMvcResultMatchers.status().isOk());
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/pacientes")).andExpect(MockMvcResultMatchers.status().isOk());
     }
     
     @Test
     public void testGETbuscarPorID() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/paciente/1"))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/pacientes/1"))
             .andExpect(MockMvcResultMatchers.status().isOk());
     }
 

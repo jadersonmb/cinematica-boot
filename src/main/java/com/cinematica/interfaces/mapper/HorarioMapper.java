@@ -1,10 +1,9 @@
-package com.cinematica.interfaces;
+package com.cinematica.interfaces.mapper;
+
+import org.mapstruct.Mapper;
 
 import com.cinematica.dto.HorarioDTO;
 import com.cinematica.model.Horario;
-
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 /**
  * HorarioMapper
@@ -12,8 +11,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel="spring")
 public interface HorarioMapper {
 
-    HorarioMapper INSTANCE = Mappers.getMapper( HorarioMapper.class );
- 
     HorarioDTO toHorarioDTO(Horario horario); 
     
 }

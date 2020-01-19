@@ -4,20 +4,19 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.cinematica.exception.UsuarioException;
+import com.cinematica.interfaces.services.UsuarioService;
 import com.cinematica.model.Usuario;
 import com.cinematica.repository.UsuarioRepository;
-
-import org.jvnet.hk2.annotations.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * UsuarioService
  */
 @Service
-@Component
-public class UsuarioService implements Serializable {
+public class UsuarioServiceImpl implements UsuarioService, Serializable {
 
     private static final long serialVersionUID = 1L;
 
