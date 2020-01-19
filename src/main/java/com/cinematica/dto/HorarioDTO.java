@@ -1,17 +1,8 @@
 package com.cinematica.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  * HorarioDTO
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class HorarioDTO {
 
 	private Integer id;

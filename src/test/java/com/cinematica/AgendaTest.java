@@ -6,10 +6,6 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import com.cinematica.dto.AgendaDTO;
-import com.cinematica.resources.AgendaResource;
-import com.cinematica.service.AgendaServiceImpl;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -19,10 +15,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.cinematica.dto.AgendaDTO;
+import com.cinematica.resources.AgendaResource;
+import com.cinematica.service.AgendaServiceImpl;
+
 /**
  * AgendaTest
  */
-@Ignore
 public class AgendaTest extends CinematicaApplicationTests {
 
     @Autowired
@@ -44,6 +43,7 @@ public class AgendaTest extends CinematicaApplicationTests {
     }
     
     @Test
+    @Ignore
     public void buscarAgendaDaSemanaPorPaciente(){
         List<AgendaDTO> dto = agendaService.buscarAgendaDaSemanaPorPaciente(68);
         assertTrue(dto.size() > 0);

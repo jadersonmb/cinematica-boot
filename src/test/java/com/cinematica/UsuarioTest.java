@@ -4,20 +4,20 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
 
+import org.junit.Ignore;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cinematica.dto.UsuarioDTO;
 import com.cinematica.model.Pessoa;
 import com.cinematica.model.SimNao;
 import com.cinematica.model.Usuario;
 import com.cinematica.service.PessoaServiceImpl;
 import com.cinematica.service.UsuarioServiceImpl;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 /**
  * UsuarioTest
  */
-@Ignore
 public class UsuarioTest extends CinematicaApplicationTests {
 
     @Autowired
@@ -40,7 +40,7 @@ public class UsuarioTest extends CinematicaApplicationTests {
         entidade.setUltimoAcesso(new Date());
         entidade.setId(entidadePessoa.getId());
 
-        Usuario entidadeSalva = usuarioService.salvar(entidade);
+        UsuarioDTO entidadeSalva = usuarioService.salvar(entidade);
         assertNotNull(entidadeSalva.getId());
     }
 }
