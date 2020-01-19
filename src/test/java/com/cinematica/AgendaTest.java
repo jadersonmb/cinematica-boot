@@ -11,6 +11,7 @@ import com.cinematica.resources.AgendaResource;
 import com.cinematica.service.AgendaServiceImpl;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 /**
  * AgendaTest
  */
+@Ignore
 public class AgendaTest extends CinematicaApplicationTests {
 
     @Autowired

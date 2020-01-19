@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cinematica.dto.EmpresaDTO;
 import com.cinematica.exception.EmpresaException;
 import com.cinematica.exception.EspecialidadeException;
-import com.cinematica.interfaces.mapper.EmpresaMapper;
+import com.cinematica.interfaces.EmpresaMapper;
 import com.cinematica.interfaces.services.EmpresaService;
 import com.cinematica.model.Empresa;
 import com.cinematica.repository.EmpresaRepository;
@@ -30,6 +30,7 @@ public class EmpresaServiceImpl implements EmpresaService, Serializable {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private EmpresaRepository empresaRepository;
+	@Autowired
 	private EmpresaMapper mapper;
 
 	@Override

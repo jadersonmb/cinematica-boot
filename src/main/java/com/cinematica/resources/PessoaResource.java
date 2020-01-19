@@ -56,7 +56,7 @@ public class PessoaResource implements Serializable {
 
     @PostMapping
     public ResponseEntity<?> salvar(@RequestBody Pessoa entidade) {
-        Pessoa pessoa = pessoaService.salvar(entidade);
+        PessoaDTO pessoa = pessoaService.salvar(entidade);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoa.getId()).toUri();
         return ResponseEntity.created(uri).body(pessoa);
     }

@@ -22,7 +22,7 @@ public interface PessoaService {
 
 	public void salvarAll(List<Pessoa> listaPessoas) throws PessoaException;
 
-	public Pessoa salvar(Pessoa entidade) throws PessoaException;
+	public PessoaDTO salvar(Pessoa entidade) throws PessoaException;
 	
 	public void delete(Pessoa entidade) throws PessoaException; 
 

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,6 +18,7 @@ import com.cinematica.dto.EspecialidadeDTO;
 import com.cinematica.resources.EspecialidadeResource;
 import com.cinematica.service.EspecialidadeServiceImpl;
 
+@Ignore
 public class EspecialidadeTest extends CinematicaApplicationTests {
 
     @Autowired

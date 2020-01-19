@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.EspecialidadeDTO;
 import com.cinematica.exception.EspecialidadeException;
-import com.cinematica.interfaces.mapper.EspecialidadeMapper;
+import com.cinematica.interfaces.EspecialidadeMapper;
 import com.cinematica.interfaces.services.EspecialidadeService;
 import com.cinematica.model.Especialidade;
 import com.cinematica.repository.EspecialidadeRepository;

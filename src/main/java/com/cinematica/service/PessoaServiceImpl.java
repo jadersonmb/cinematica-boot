@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.PessoaDTO;
 import com.cinematica.exception.PessoaException;
-import com.cinematica.interfaces.mapper.PessoaMapper;
+import com.cinematica.interfaces.PessoaMapper;
 import com.cinematica.interfaces.services.PessoaService;
 import com.cinematica.model.Pessoa;
 import com.cinematica.repository.PessoaRepository;
@@ -24,6 +24,7 @@ public class PessoaServiceImpl implements PessoaService, Serializable {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+    @Autowired
     private PessoaMapper mapper;
 
     public List<Pessoa> listarTodos() {
@@ -39,8 +40,9 @@ public class PessoaServiceImpl implements PessoaService, Serializable {
         pessoaRepository.saveAll(listaPessoas);
     }
 
-    public Pessoa salvar(Pessoa entidade) {
-        return pessoaRepository.save(entidade);
+    public PessoaDTO salvar(Pessoa entidade) {
+        Pessoa pessoa = pessoaRepository.save(entidade);
+        return mapper.toPessoaDTO(pessoa);
     }
 
     public void delete(Pessoa entidade) throws PessoaException {

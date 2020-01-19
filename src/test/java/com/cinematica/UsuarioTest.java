@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * UsuarioTest
  */
+@Ignore
 public class UsuarioTest extends CinematicaApplicationTests {
 
     @Autowired

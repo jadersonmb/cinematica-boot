@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.AgendaDTO;
 import com.cinematica.exception.AgendaException;
-import com.cinematica.interfaces.mapper.AgendaMapper;
+import com.cinematica.interfaces.AgendaMapper;
 import com.cinematica.interfaces.services.AgendaService;
 import com.cinematica.model.Agenda;
 import com.cinematica.repository.AgendaRepository;
@@ -25,6 +25,7 @@ public class AgendaServiceImpl implements AgendaService, Serializable {
 
     @Autowired
     private AgendaRepository agendaRepository;
+    @Autowired
     private AgendaMapper mapper;
 
     public Agenda buscarAgendaPorIdPaciente(Long id) throws AgendaException {
