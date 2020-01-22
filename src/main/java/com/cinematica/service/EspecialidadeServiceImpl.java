@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.EspecialidadeDTO;
@@ -35,11 +36,12 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 	public EspecialidadeDTO buscarPorId(Integer id) throws EspecialidadeException {
 		Optional<Especialidade> obj = especialidadeRepository.findById(id);
 		EspecialidadeDTO especialidadeDTO = mapper
-				.toEspecialidadeDTO(obj.orElseThrow(() -> new EspecialidadeException("Especialidade não existe")));
+				.toEspecialidadeDTO(obj.orElseThrow(() -> new EmptyResultDataAccessException("Não Encontrou", id)));
 		return especialidadeDTO;
 	}
 
-	public EspecialidadeDTO salvar(Especialidade entidade) throws EspecialidadeException {
+	public EspecialidadeDTO salvar(EspecialidadeDTO entidadeDTO) throws EspecialidadeException {
+		Especialidade entidade = mapper.toEspecialidade(entidadeDTO);
 		Especialidade especialidade = especialidadeRepository.save(entidade);
 		return mapper.toEspecialidadeDTO(especialidade);
 	}

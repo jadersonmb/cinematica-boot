@@ -31,7 +31,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  */
 @ControllerAdvice
 @Component
-public class CinematicaExceptionHandler extends ResponseEntityExceptionHandler{
+public class CinematicaExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@Autowired
 	private MessageSource messageSource;
