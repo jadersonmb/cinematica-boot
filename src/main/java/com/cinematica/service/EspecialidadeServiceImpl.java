@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.EspecialidadeDTO;
 import com.cinematica.exception.EspecialidadeException;
+import com.cinematica.framework.util.VerificadorUtil;
 import com.cinematica.interfaces.EspecialidadeMapper;
 import com.cinematica.interfaces.services.EspecialidadeService;
 import com.cinematica.model.Especialidade;
@@ -36,11 +36,16 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 	public EspecialidadeDTO buscarPorId(Integer id) throws EspecialidadeException {
 		Optional<Especialidade> obj = especialidadeRepository.findById(id);
 		EspecialidadeDTO especialidadeDTO = mapper
-				.toEspecialidadeDTO(obj.orElseThrow(() -> new EmptyResultDataAccessException("Não Encontrou", id)));
+				.toEspecialidadeDTO(obj.orElseThrow(() -> new EspecialidadeException()));
 		return especialidadeDTO;
 	}
 
 	public EspecialidadeDTO salvar(EspecialidadeDTO entidadeDTO) throws EspecialidadeException {
+		
+		if(VerificadorUtil.estaNulo(entidadeDTO.getDescricao())) {
+			throw new EspecialidadeException("erro_descricao_nao_pode_ser_nula");
+		}
+		
 		Especialidade entidade = mapper.toEspecialidade(entidadeDTO);
 		Especialidade especialidade = especialidadeRepository.save(entidade);
 		return mapper.toEspecialidadeDTO(especialidade);
