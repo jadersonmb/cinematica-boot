@@ -1,11 +1,14 @@
 package com.cinematica.dto;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * EspecialidadeDTO
  */
 public class EspecialidadeDTO {
 
 	private Integer id;
+	@NotNull(message = "Campo Obrigatório")
 	private String descricao;
 	private String ativo;
 

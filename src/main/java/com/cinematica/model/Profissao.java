@@ -19,7 +19,7 @@ public class Profissao implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private Long id;
 	private String descricao;
 	
 	public Profissao(){};
@@ -27,11 +27,11 @@ public class Profissao implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false)
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
