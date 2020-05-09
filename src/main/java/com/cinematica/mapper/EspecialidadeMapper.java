@@ -1,4 +1,4 @@
-package com.cinematica.interfaces;
+package com.cinematica.mapper;
 
 import org.mapstruct.Mapper;
 

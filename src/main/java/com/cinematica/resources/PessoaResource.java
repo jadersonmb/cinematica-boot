@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.cinematica.dto.PessoaDTO;
-import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.PessoaException;
-import com.cinematica.interfaces.services.PessoaService;
+import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.model.Pessoa;
+import com.cinematica.services.PessoaService;
 
 /**
  * pessoaResource

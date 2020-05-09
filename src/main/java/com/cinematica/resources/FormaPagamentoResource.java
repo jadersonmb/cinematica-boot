@@ -22,21 +22,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.cinematica.dto.EspecialidadeDTO;
-import com.cinematica.exception.EspecialidadeException;
+import com.cinematica.dto.FormaPagamentoDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
+import com.cinematica.exception.FormaPagamentoException;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.services.EspecialidadeService;
+import com.cinematica.services.FormaPagamentoService;
 
-/**
- * 
- * @author Jaderson Morais
- *
- */
 @RestController
-@RequestMapping(value = "/especialidades")
+@RequestMapping(value = "/formaPagamentos")
 @CrossOrigin(origins = "http://localhost:4200")
-public class EspecialidadeResource implements Serializable {
+public class FormaPagamentoResource implements Serializable {
 
 	/**
 	 * 
@@ -44,52 +39,53 @@ public class EspecialidadeResource implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private EspecialidadeService especialidadeService;
+	private FormaPagamentoService formaPagamentoService;
 	@Autowired
 	private MessageSource messageSource;
 
 	@GetMapping
 	public ResponseEntity<?> listarTodos() {
-		List<EspecialidadeDTO> listaEspecialidadeDTO = especialidadeService.listarTodos();
-		return ResponseEntity.ok().body(listaEspecialidadeDTO);
+		List<FormaPagamentoDTO> listaFormaPagamentosDTO = formaPagamentoService.listarTodos();
+		return ResponseEntity.ok().body(listaFormaPagamentosDTO);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
-		EspecialidadeDTO entidade = especialidadeService.buscarPorId(id);
+	public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+		FormaPagamentoDTO entidade = formaPagamentoService.buscarPorId(id);
 		return ResponseEntity.ok().body(entidade);
 	}
 
 	@PostMapping
-	public ResponseEntity<?> salvar(@RequestBody EspecialidadeDTO entidadeDTO) {
-		EspecialidadeDTO especialidadeDTO = especialidadeService.salvar(entidadeDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(especialidadeDTO.getId()).toUri();
-        return ResponseEntity.created(uri).body(especialidadeDTO);
+	public ResponseEntity<?> salvar(@RequestBody FormaPagamentoDTO entidadeDTO) {
+		FormaPagamentoDTO formaPagamentoDTO = formaPagamentoService.salvar(entidadeDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(formaPagamentoDTO.getId()).toUri();
+        return ResponseEntity.created(uri).body(formaPagamentoDTO);
 
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<?> delete(@PathVariable Integer id) {
-		EspecialidadeDTO entidade = especialidadeService.buscarPorId(id);
-		especialidadeService.delete(entidade);
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		FormaPagamentoDTO entidade = formaPagamentoService.buscarPorId(id);
+		formaPagamentoService.delete(entidade);
 		return ResponseEntity.ok().build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody EspecialidadeDTO entidadeDTO) {
-		EspecialidadeDTO entidadeSalvaDTO = especialidadeService.buscarPorId(id);
+	public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody FormaPagamentoDTO entidadeDTO) {
+		FormaPagamentoDTO entidadeSalvaDTO = formaPagamentoService.buscarPorId(id);
 		if(VerificadorUtil.naoEstaNulo(entidadeSalvaDTO.getId())) {
 			BeanUtils.copyProperties(entidadeDTO, entidadeSalvaDTO, "id");
-			especialidadeService.salvar(entidadeSalvaDTO);
+			formaPagamentoService.salvar(entidadeSalvaDTO);
 		}
-		return ResponseEntity.ok().build();
+	return ResponseEntity.ok().build();
 	}
 	
-	@ExceptionHandler({ EspecialidadeException.class })
-	public ResponseEntity<Object> EspecialidadeException(EspecialidadeException ex) {
+	@ExceptionHandler({ FormaPagamentoException.class })
+	public ResponseEntity<Object> FormaPagamentoException(FormaPagamentoException ex) {
 		String mensagemUsuario = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return ResponseEntity.badRequest().body(erros);
 	}
+
 }

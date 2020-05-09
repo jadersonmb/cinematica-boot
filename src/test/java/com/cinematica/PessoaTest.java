@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.cinematica.model.Pessoa;
 import com.cinematica.resources.PessoaResource;
-import com.cinematica.service.PessoaServiceImpl;
+import com.cinematica.services.PessoaServiceImpl;
 
 /**
  * PessoaTest

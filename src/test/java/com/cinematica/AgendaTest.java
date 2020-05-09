@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.cinematica.dto.AgendaDTO;
 import com.cinematica.resources.AgendaResource;
-import com.cinematica.service.AgendaServiceImpl;
+import com.cinematica.services.AgendaServiceImpl;
 
 /**
  * AgendaTest

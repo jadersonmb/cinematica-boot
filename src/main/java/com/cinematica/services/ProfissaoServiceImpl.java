@@ -1,4 +1,4 @@
-package com.cinematica.service;
+package com.cinematica.services;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,8 +12,7 @@ import com.cinematica.dto.ProfissaoDTO;
 import com.cinematica.exception.EspecialidadeException;
 import com.cinematica.exception.ProfissaoException;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.interfaces.ProfissaoMapper;
-import com.cinematica.interfaces.services.ProfissaoService;
+import com.cinematica.mapper.ProfissaoMapper;
 import com.cinematica.model.Profissao;
 import com.cinematica.repository.ProfissaoRepository;
 

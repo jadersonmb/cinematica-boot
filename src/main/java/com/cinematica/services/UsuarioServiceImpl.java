@@ -1,4 +1,4 @@
-package com.cinematica.service;
+package com.cinematica.services;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.UsuarioDTO;
 import com.cinematica.exception.UsuarioException;
-import com.cinematica.interfaces.UsuarioMapper;
-import com.cinematica.interfaces.services.UsuarioService;
+import com.cinematica.mapper.UsuarioMapper;
 import com.cinematica.model.Usuario;
 import com.cinematica.repository.UsuarioRepository;
 

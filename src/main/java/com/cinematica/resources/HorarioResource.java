@@ -22,21 +22,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.cinematica.dto.EspecialidadeDTO;
+import com.cinematica.dto.HorarioDTO;
 import com.cinematica.exception.EspecialidadeException;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.services.EspecialidadeService;
+import com.cinematica.services.HorarioService;
 
-/**
- * 
- * @author Jaderson Morais
- *
- */
 @RestController
-@RequestMapping(value = "/especialidades")
+@RequestMapping(value = "/horarios")
 @CrossOrigin(origins = "http://localhost:4200")
-public class EspecialidadeResource implements Serializable {
+public class HorarioResource implements Serializable {
 
 	/**
 	 * 
@@ -44,49 +39,49 @@ public class EspecialidadeResource implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private EspecialidadeService especialidadeService;
+	private HorarioService horarioService;
 	@Autowired
 	private MessageSource messageSource;
 
 	@GetMapping
 	public ResponseEntity<?> listarTodos() {
-		List<EspecialidadeDTO> listaEspecialidadeDTO = especialidadeService.listarTodos();
+		List<HorarioDTO> listaEspecialidadeDTO = horarioService.listarTodos();
 		return ResponseEntity.ok().body(listaEspecialidadeDTO);
 	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
-		EspecialidadeDTO entidade = especialidadeService.buscarPorId(id);
+		HorarioDTO entidade = horarioService.buscarPorId(id);
 		return ResponseEntity.ok().body(entidade);
 	}
 
 	@PostMapping
-	public ResponseEntity<?> salvar(@RequestBody EspecialidadeDTO entidadeDTO) {
-		EspecialidadeDTO especialidadeDTO = especialidadeService.salvar(entidadeDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(especialidadeDTO.getId()).toUri();
-        return ResponseEntity.created(uri).body(especialidadeDTO);
+	public ResponseEntity<?> salvar(@RequestBody HorarioDTO entidadeDTO) {
+		HorarioDTO horarioDTO = horarioService.salvar(entidadeDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(horarioDTO.getId()).toUri();
+        return ResponseEntity.created(uri).body(horarioDTO);
 
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
-		EspecialidadeDTO entidade = especialidadeService.buscarPorId(id);
-		especialidadeService.delete(entidade);
+		HorarioDTO entidade = horarioService.buscarPorId(id);
+		horarioService.delete(entidade);
 		return ResponseEntity.ok().build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody EspecialidadeDTO entidadeDTO) {
-		EspecialidadeDTO entidadeSalvaDTO = especialidadeService.buscarPorId(id);
+	public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody HorarioDTO entidadeDTO) {
+		HorarioDTO entidadeSalvaDTO = horarioService.buscarPorId(id);
 		if(VerificadorUtil.naoEstaNulo(entidadeSalvaDTO.getId())) {
 			BeanUtils.copyProperties(entidadeDTO, entidadeSalvaDTO, "id");
-			especialidadeService.salvar(entidadeSalvaDTO);
+			horarioService.salvar(entidadeSalvaDTO);
 		}
 		return ResponseEntity.ok().build();
 	}
 	
-	@ExceptionHandler({ EspecialidadeException.class })
-	public ResponseEntity<Object> EspecialidadeException(EspecialidadeException ex) {
+	@ExceptionHandler({ com.cinematica.exception.HorarioException.class })
+	public ResponseEntity<Object> HorarioException(EspecialidadeException ex) {
 		String mensagemUsuario = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));

@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.cinematica.dto.EspecialidadeDTO;
 import com.cinematica.resources.EspecialidadeResource;
-import com.cinematica.service.EspecialidadeServiceImpl;
+import com.cinematica.services.EspecialidadeServiceImpl;
 
 public class EspecialidadeTest extends CinematicaApplicationTests {
 

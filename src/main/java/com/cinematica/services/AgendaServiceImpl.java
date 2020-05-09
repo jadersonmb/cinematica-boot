@@ -1,4 +1,4 @@
-package com.cinematica.service;
+package com.cinematica.services;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.AgendaDTO;
 import com.cinematica.exception.AgendaException;
-import com.cinematica.interfaces.AgendaMapper;
-import com.cinematica.interfaces.services.AgendaService;
+import com.cinematica.mapper.AgendaMapper;
 import com.cinematica.model.Agenda;
 import com.cinematica.repository.AgendaRepository;
 

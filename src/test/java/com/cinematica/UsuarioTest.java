@@ -12,8 +12,8 @@ import com.cinematica.dto.UsuarioDTO;
 import com.cinematica.model.Pessoa;
 import com.cinematica.model.SimNao;
 import com.cinematica.model.Usuario;
-import com.cinematica.service.PessoaServiceImpl;
-import com.cinematica.service.UsuarioServiceImpl;
+import com.cinematica.services.PessoaServiceImpl;
+import com.cinematica.services.UsuarioServiceImpl;
 
 /**
  * UsuarioTest

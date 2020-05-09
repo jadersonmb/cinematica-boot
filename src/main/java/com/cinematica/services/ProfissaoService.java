@@ -1,4 +1,4 @@
-package com.cinematica.interfaces.services;
+package com.cinematica.services;
 
 import java.util.List;
 
@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 import com.cinematica.dto.ProfissaoDTO;
 import com.cinematica.exception.ProfissaoException;
 
+/**
+ * 
+ * @author Jaderson Morais
+ *
+ */
 @Service
 public interface ProfissaoService {
 	

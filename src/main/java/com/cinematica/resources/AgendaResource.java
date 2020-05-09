@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cinematica.dto.AgendaDTO;
 import com.cinematica.exception.AgendaException;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
-import com.cinematica.interfaces.services.AgendaService;
-import com.cinematica.interfaces.services.PessoaService;
 import com.cinematica.model.Agenda;
 import com.cinematica.model.Pessoa;
+import com.cinematica.services.AgendaService;
+import com.cinematica.services.PessoaService;
 
 /**
  * AgendaResource

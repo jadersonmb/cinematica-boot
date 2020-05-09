@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.cinematica.dto.ProfissaoDTO;
-import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.ProfissaoException;
+import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.interfaces.services.ProfissaoService;
+import com.cinematica.services.ProfissaoService;
 
 /**
  * 
@@ -86,7 +86,7 @@ public class ProfissaoResource implements Serializable {
 	}
 	
 	@ExceptionHandler({ ProfissaoException.class })
-	public ResponseEntity<Object> EspecialidadeException(ProfissaoException ex) {
+	public ResponseEntity<Object> ProfissaoException(ProfissaoException ex) {
 		String mensagemUsuario = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));

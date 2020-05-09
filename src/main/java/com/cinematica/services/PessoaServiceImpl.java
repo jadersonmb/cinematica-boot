@@ -1,4 +1,4 @@
-package com.cinematica.service;
+package com.cinematica.services;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.PessoaDTO;
 import com.cinematica.exception.PessoaException;
-import com.cinematica.interfaces.PessoaMapper;
-import com.cinematica.interfaces.services.PessoaService;
+import com.cinematica.mapper.PessoaMapper;
 import com.cinematica.model.Pessoa;
 import com.cinematica.repository.PessoaRepository;
 

@@ -21,8 +21,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.cinematica.dto.UsuarioDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.UsuarioException;
-import com.cinematica.interfaces.services.UsuarioService;
 import com.cinematica.model.Usuario;
+import com.cinematica.services.UsuarioService;
 
 /**
  * UsuarioResourse

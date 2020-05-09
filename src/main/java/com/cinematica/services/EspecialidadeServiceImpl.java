@@ -1,4 +1,4 @@
-package com.cinematica.service;
+package com.cinematica.services;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cinematica.dto.EspecialidadeDTO;
 import com.cinematica.exception.EspecialidadeException;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.interfaces.EspecialidadeMapper;
-import com.cinematica.interfaces.services.EspecialidadeService;
+import com.cinematica.mapper.EspecialidadeMapper;
 import com.cinematica.model.Especialidade;
 import com.cinematica.repository.EspecialidadeRepository;
 

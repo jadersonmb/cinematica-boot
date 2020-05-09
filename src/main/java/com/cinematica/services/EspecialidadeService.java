@@ -1,7 +1,4 @@
-/**
- * 
- */
-package com.cinematica.interfaces.services;
+package com.cinematica.services;
 
 import java.util.List;
 

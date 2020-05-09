@@ -1,4 +1,4 @@
-package com.cinematica.interfaces.services;
+package com.cinematica.services;
 
 import org.springframework.stereotype.Service;
 
