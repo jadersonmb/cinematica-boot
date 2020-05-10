@@ -3,7 +3,13 @@ package com.cinematica.dto;
 import java.util.Date;
 
 import com.cinematica.model.EnderecoEmpresa;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+/**
+ * 
+ * @author Jaderson Morais
+ *
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EmpresaDTO {
 
 	private Integer id;

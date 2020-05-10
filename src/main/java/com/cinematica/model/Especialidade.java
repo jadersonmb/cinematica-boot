@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ public class Especialidade implements Serializable {
 	
 	private Integer id;
 	private String descricao;
+	private SimNao ativo = SimNao.Sim;
 
 	public Especialidade() {
 	}
@@ -41,6 +44,16 @@ public class Especialidade implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "ativo", nullable = false)
+	public SimNao getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(SimNao ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

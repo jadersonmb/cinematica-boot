@@ -1,8 +1,11 @@
 package com.cinematica.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * HorarioDTO
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class HorarioDTO {
 
 	private Integer id;

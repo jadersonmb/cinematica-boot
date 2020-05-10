@@ -2,15 +2,19 @@ package com.cinematica.dto;
 
 import javax.validation.constraints.NotNull;
 
+import com.cinematica.model.SimNao;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * EspecialidadeDTO
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EspecialidadeDTO {
 
 	private Integer id;
 	@NotNull(message = "Campo Obrigatório")
 	private String descricao;
-	private String ativo;
+	private SimNao ativo = SimNao.Sim;
 
 	public Integer getId() {
 		return id;
@@ -28,12 +32,11 @@ public class EspecialidadeDTO {
 		this.descricao = descricao;
 	}
 
-	public String getAtivo() {
+	public SimNao getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(String ativo) {
+	public void setAtivo(SimNao ativo) {
 		this.ativo = ativo;
 	}
-
 }

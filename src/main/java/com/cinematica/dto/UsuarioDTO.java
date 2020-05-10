@@ -2,13 +2,14 @@ package com.cinematica.dto;
 
 import java.util.Date;
 
-import com.cinematica.model.Pessoa;
 import com.cinematica.model.SimNao;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UsuarioDTO {
 
 	private Integer id;
-	private Pessoa pessoa;
+	private PessoaDTO pessoa;
 	private String login;
 	private String senha;
 	private Date ultimoAcesso = new Date();
@@ -24,11 +25,11 @@ public class UsuarioDTO {
 		this.id = id;
 	}
 
-	public Pessoa getPessoa() {
+	public PessoaDTO getPessoa() {
 		return pessoa;
 	}
-
-	public void setPessoa(Pessoa pessoa) {
+	
+	public void setPessoa(PessoaDTO pessoa) {
 		this.pessoa = pessoa;
 	}
 
