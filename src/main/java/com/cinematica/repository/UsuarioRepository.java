@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * UsuarioRepository
  */
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer>, UsuarioRepositoryCustom {
 
     
 }

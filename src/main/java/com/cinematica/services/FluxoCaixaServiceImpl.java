@@ -35,7 +35,7 @@ public class FluxoCaixaServiceImpl implements FluxoCaixaService, Serializable {
 	public FluxoCaixaDTO buscarPorId(Long id) throws FluxoCaixaException {
 		Optional<FluxoCaixa> obj = fluxoCaixaRepository.findById(id);
 		if(!obj.isPresent()) {
-			throw new FluxoCaixaException("erro_especialidade_nao_existe");
+			throw new FluxoCaixaException("erro_fluxo_nao_existe");
 		}
 		FluxoCaixaDTO fluxoCaixaDTO = mapper.toFluxoCaixaDTO(obj.orElseThrow(() -> new FluxoCaixaException()));
 		return fluxoCaixaDTO;

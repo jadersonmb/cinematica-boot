@@ -41,6 +41,12 @@ public class AgendaResource implements Serializable {
     @Autowired
 	private MessageSource messageSource;
 
+    @GetMapping
+	public ResponseEntity<?> listarTodos() {
+		List<AgendaDTO> listaAgendaDTO = agendaService.listarTodos();
+		return ResponseEntity.ok().body(listaAgendaDTO);
+	}
+    
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> buscarAgendaPorIdPaciente(@PathVariable Integer id) {
         Pessoa entidadePessoa = pessoaService.buscarPorId(id);
@@ -61,12 +67,15 @@ public class AgendaResource implements Serializable {
         return ResponseEntity.ok().body(entidade);
     }
 
-
     @ExceptionHandler({AgendaException.class})
-	public ResponseEntity<Object> EspecialidadeException(AgendaException ex) {
-		String mensagemUsuario = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
+	public ResponseEntity<Object> AgendaException(AgendaException ex) {
+    	String mensagemUsuario = "";
+		String[] split = ex.getMessage().split(";");
+		for (String exMessage : split) {
+			mensagemUsuario = mensagemUsuario + messageSource.getMessage(exMessage, null, LocaleContextHolder.getLocale()).concat(",");
+		}
 		String mensagemDesenvolvedor = ex.toString();
-		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario.replaceFirst("(,$)", ""), mensagemDesenvolvedor));
 		return ResponseEntity.badRequest().body(erros);
 	}
     

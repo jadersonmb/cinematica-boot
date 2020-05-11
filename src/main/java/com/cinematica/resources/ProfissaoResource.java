@@ -87,9 +87,13 @@ public class ProfissaoResource implements Serializable {
 	
 	@ExceptionHandler({ ProfissaoException.class })
 	public ResponseEntity<Object> ProfissaoException(ProfissaoException ex) {
-		String mensagemUsuario = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
+		String mensagemUsuario = "";
+		String[] split = ex.getMessage().split(";");
+		for (String exMessage : split) {
+			mensagemUsuario = mensagemUsuario + messageSource.getMessage(exMessage, null, LocaleContextHolder.getLocale()).concat(",");
+		}
 		String mensagemDesenvolvedor = ex.toString();
-		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario.replaceFirst("(,$)", ""), mensagemDesenvolvedor));
 		return ResponseEntity.badRequest().body(erros);
 	}
 }

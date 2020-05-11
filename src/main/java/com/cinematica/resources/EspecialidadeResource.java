@@ -5,6 +5,8 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -61,7 +63,7 @@ public class EspecialidadeResource implements Serializable {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> salvar(@RequestBody EspecialidadeDTO entidadeDTO) {
+	public ResponseEntity<?> salvar(@RequestBody @Valid EspecialidadeDTO entidadeDTO) {
 		EspecialidadeDTO especialidadeDTO = especialidadeService.salvar(entidadeDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(especialidadeDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(especialidadeDTO);
@@ -87,9 +89,13 @@ public class EspecialidadeResource implements Serializable {
 	
 	@ExceptionHandler({ EspecialidadeException.class })
 	public ResponseEntity<Object> EspecialidadeException(EspecialidadeException ex) {
-		String mensagemUsuario = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
+		String mensagemUsuario = "";
+		String[] split = ex.getMessage().split(";");
+		for (String exMessage : split) {
+			mensagemUsuario = mensagemUsuario + messageSource.getMessage(exMessage, null, LocaleContextHolder.getLocale()).concat(",");
+		}
 		String mensagemDesenvolvedor = ex.toString();
-		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario.replaceFirst("(,$)", ""), mensagemDesenvolvedor));
 		return ResponseEntity.badRequest().body(erros);
 	}
 }

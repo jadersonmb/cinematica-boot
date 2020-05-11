@@ -23,4 +23,6 @@ public interface AgendaService {
     public List<Agenda> buscarAgendaPorFuncionarioId(Integer id) throws AgendaException;
 
 	public List<AgendaDTO> buscarAgendaDaSemanaPorPaciente(Integer id) throws AgendaException;
+
+	public List<AgendaDTO> listarTodos() throws AgendaException;
 }

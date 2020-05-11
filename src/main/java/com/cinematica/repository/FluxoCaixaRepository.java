@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.cinematica.model.FluxoCaixa;
 
 @Repository
-public interface FluxoCaixaRepository extends JpaRepository<FluxoCaixa, Long>{
+public interface FluxoCaixaRepository extends JpaRepository<FluxoCaixa, Long>, FluxoCaiaxRepositoryCustom {
 
 }

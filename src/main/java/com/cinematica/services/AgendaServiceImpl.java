@@ -43,9 +43,17 @@ public class AgendaServiceImpl implements AgendaService, Serializable {
     }
 
 	public List<AgendaDTO> buscarAgendaDaSemanaPorPaciente(Integer id) throws AgendaException {
-        List<Agenda> obj = agendaRepository.buscarAgendaDaSemanaPorPaciente(id);
+        List<Agenda> obj = agendaRepository.consultarAgendaDaSemanaPorPaciente(id);
         List<AgendaDTO> listObj = new ArrayList<>();
         obj.forEach(p-> listObj.add(mapper.toAgendaDTO(p)));
 		return listObj;
+	}
+
+	@Override
+	public List<AgendaDTO> listarTodos() throws AgendaException {
+		List<Agenda> listaAgendas = agendaRepository.findAll();
+		List<AgendaDTO> listaAgendaDTO = new ArrayList<>();
+		listaAgendas.forEach(p-> listaAgendaDTO.add(mapper.toAgendaDTO(p)));
+		return  listaAgendaDTO;
 	}
 }
