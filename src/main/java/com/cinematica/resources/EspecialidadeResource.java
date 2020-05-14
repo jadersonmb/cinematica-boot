@@ -28,7 +28,7 @@ import com.cinematica.dto.EspecialidadeDTO;
 import com.cinematica.exception.EspecialidadeException;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.services.EspecialidadeService;
+import com.cinematica.services.especialidade.EspecialidadeService;
 
 /**
  * 

@@ -1,13 +1,19 @@
 package com.cinematica.dto;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * HorarioDTO
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HorarioDTO {
+public class HorarioDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String horarioInicio;
 	private String horarioFim;

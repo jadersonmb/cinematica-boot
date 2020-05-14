@@ -23,6 +23,7 @@ public class FormaPagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String descricao;
+	private SimNao ativo = SimNao.Sim;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +44,14 @@ public class FormaPagamento implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public SimNao getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(SimNao ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

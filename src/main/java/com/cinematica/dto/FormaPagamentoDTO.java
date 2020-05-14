@@ -1,12 +1,18 @@
 package com.cinematica.dto;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FormaPagamentoDTO {
+public class FormaPagamentoDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	@NotNull(message = "Campo Obrigatório")
 	private String descricao;

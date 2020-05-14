@@ -1,5 +1,6 @@
 package com.cinematica.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -10,8 +11,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * AgendaDTO
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AgendaDTO {
+public class AgendaDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	@NotNull(message = "Campo Obrigatório")
 	private Date dataInicio;

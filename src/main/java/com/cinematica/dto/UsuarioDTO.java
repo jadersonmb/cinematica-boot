@@ -1,13 +1,18 @@
 package com.cinematica.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.cinematica.model.SimNao;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UsuarioDTO {
+public class UsuarioDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private PessoaDTO pessoa;
 	private String login;
@@ -28,7 +33,7 @@ public class UsuarioDTO {
 	public PessoaDTO getPessoa() {
 		return pessoa;
 	}
-	
+
 	public void setPessoa(PessoaDTO pessoa) {
 		this.pessoa = pessoa;
 	}

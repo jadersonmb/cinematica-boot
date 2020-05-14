@@ -59,7 +59,7 @@ public class FluxoCaixaDTO implements Serializable {
 	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
-	
+
 	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}

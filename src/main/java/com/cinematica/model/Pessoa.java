@@ -52,6 +52,7 @@ public class Pessoa implements Serializable {
 	private String telefone;
 	private String indicacao;
 	private Medico medico;
+	private SimNao ativo = SimNao.Sim;
 	
 	public Pessoa() {}
 
@@ -251,7 +252,6 @@ public class Pessoa implements Serializable {
 		this.nomeCompleto = nomeCompleto;
 	}
 	
-	
 	@Column(name = "indicacao")
 	public String getIndicacao() {
 		return indicacao;
@@ -269,6 +269,15 @@ public class Pessoa implements Serializable {
 
 	public void setMedico(Medico medico) {
 		this.medico = medico;
+	}
+	
+	@Column(name = "ativo")
+	public SimNao getAtivo() {
+		return ativo;
+	}
+	
+	public void setAtivo(SimNao ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

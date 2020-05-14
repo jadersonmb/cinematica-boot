@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -15,16 +16,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.cinematica.dto.PessoaDTO;
-import com.cinematica.exception.PessoaException;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
+import com.cinematica.exception.PessoaException;
+import com.cinematica.framework.util.VerificadorUtil;
 import com.cinematica.model.Pessoa;
-import com.cinematica.services.PessoaService;
+import com.cinematica.services.pessoa.PessoaService;
 
 /**
  * pessoaResource
@@ -49,13 +52,12 @@ public class PessoaResource implements Serializable {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<PessoaDTO> buscarPorId(@PathVariable Integer id) {
-        Pessoa entidade = pessoaService.buscarPorId(id);
-        PessoaDTO dto = pessoaService.toDTO(entidade);
-        return ResponseEntity.ok().body(dto);
+        PessoaDTO entidade = pessoaService.buscarPorId(id);
+        return ResponseEntity.ok().body(entidade);
     }
 
     @PostMapping
-    public ResponseEntity<?> salvar(@RequestBody Pessoa entidade) {
+    public ResponseEntity<?> salvar(@RequestBody PessoaDTO entidade) {
         PessoaDTO pessoa = pessoaService.salvar(entidade);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoa.getId()).toUri();
         return ResponseEntity.created(uri).body(pessoa);
@@ -63,10 +65,20 @@ public class PessoaResource implements Serializable {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
-        Pessoa entidade = pessoaService.buscarPorId(id);
-        pessoaService.delete(entidade);
+        PessoaDTO entidadeDTO = pessoaService.buscarPorId(id);
+        pessoaService.delete(entidadeDTO);
         return ResponseEntity.noContent().build();
     }
+    
+    @PutMapping(value = "/{id}")
+	public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody PessoaDTO pessoaDTO) {
+		PessoaDTO entidadeSalvaDTO = pessoaService.buscarPorId(id);
+		if(VerificadorUtil.naoEstaNulo(entidadeSalvaDTO.getId())) {
+			BeanUtils.copyProperties(pessoaDTO, entidadeSalvaDTO, "id");
+			pessoaService.salvar(entidadeSalvaDTO);
+		}
+		return ResponseEntity.ok().build();
+	}
 
     @ExceptionHandler({PessoaException.class})
 	public ResponseEntity<Object> EspecialidadeException(PessoaException ex) {

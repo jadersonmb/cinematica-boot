@@ -22,7 +22,7 @@ import com.cinematica.dto.UsuarioDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.UsuarioException;
 import com.cinematica.model.Usuario;
-import com.cinematica.services.UsuarioService;
+import com.cinematica.services.usuario.UsuarioService;
 
 /**
  * UsuarioResourse

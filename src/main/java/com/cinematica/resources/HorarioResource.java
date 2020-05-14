@@ -26,7 +26,7 @@ import com.cinematica.dto.HorarioDTO;
 import com.cinematica.exception.EspecialidadeException;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.services.HorarioService;
+import com.cinematica.services.horario.HorarioService;
 
 @RestController
 @RequestMapping(value = "/horarios")

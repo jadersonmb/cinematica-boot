@@ -1,17 +1,23 @@
 package com.cinematica.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.cinematica.model.EnderecoEmpresa;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 
  * @author Jaderson Morais
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EmpresaDTO {
+public class EmpresaDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String nomeFantasia;
 	private String razaoSocial;

@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import com.cinematica.model.SimNao;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -20,16 +21,21 @@ public class PessoaDTO implements Serializable {
 	private String nomeCompleto;
 	private Date criadoEm;
 	private String tipoPessoa;
-
+	private EmpresaDTO empresa;
+	private EnderecoDTO endereco;
+	private ProfissaoDTO profissao;
 	private String cpf;
 	private String rg;
 	private String sexo;
 	private String email;
 	private String telefoneCelular;
 	private String fotoUrl;
-	private String funcionario;
 	private Date dataNascimento;
 	private String telefone;
+	private Integer numeroCalcado;
+	private String crefito;
+	private SimNao funcionario = SimNao.Não;
+	private SimNao ativo = SimNao.Sim;
 
 	public Integer getId() {
 		return id;
@@ -69,6 +75,30 @@ public class PessoaDTO implements Serializable {
 
 	public void setTipoPessoa(String tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
+	}
+
+	public EmpresaDTO getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(EmpresaDTO empresa) {
+		this.empresa = empresa;
+	}
+
+	public EnderecoDTO getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(EnderecoDTO endereco) {
+		this.endereco = endereco;
+	}
+
+	public ProfissaoDTO getProfissao() {
+		return profissao;
+	}
+
+	public void setProfissao(ProfissaoDTO profissao) {
+		this.profissao = profissao;
 	}
 
 	public String getCpf() {
@@ -119,14 +149,6 @@ public class PessoaDTO implements Serializable {
 		this.fotoUrl = fotoUrl;
 	}
 
-	public String getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(String funcionario) {
-		this.funcionario = funcionario;
-	}
-
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -143,8 +165,36 @@ public class PessoaDTO implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Integer getNumeroCalcado() {
+		return numeroCalcado;
+	}
+
+	public void setNumeroCalcado(Integer numeroCalcado) {
+		this.numeroCalcado = numeroCalcado;
+	}
+
+	public String getCrefito() {
+		return crefito;
+	}
+
+	public void setCrefito(String crefito) {
+		this.crefito = crefito;
+	}
+
+	public SimNao getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(SimNao funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public SimNao getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(SimNao ativo) {
+		this.ativo = ativo;
 	}
 
 }

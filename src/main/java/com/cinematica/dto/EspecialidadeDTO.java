@@ -39,4 +39,5 @@ public class EspecialidadeDTO {
 	public void setAtivo(SimNao ativo) {
 		this.ativo = ativo;
 	}
+
 }

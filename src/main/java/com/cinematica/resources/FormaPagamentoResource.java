@@ -26,7 +26,7 @@ import com.cinematica.dto.FormaPagamentoDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.FormaPagamentoException;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.services.FormaPagamentoService;
+import com.cinematica.services.formaPagamento.FormaPagamentoService;
 
 @RestController
 @RequestMapping(value = "/formaPagamentos")

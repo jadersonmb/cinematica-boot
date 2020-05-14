@@ -26,7 +26,7 @@ import com.cinematica.dto.ProfissaoDTO;
 import com.cinematica.exception.ProfissaoException;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.services.ProfissaoService;
+import com.cinematica.services.profissao.ProfissaoService;
 
 /**
  * 

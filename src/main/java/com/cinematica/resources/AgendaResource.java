@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cinematica.dto.AgendaDTO;
+import com.cinematica.dto.PessoaDTO;
 import com.cinematica.exception.AgendaException;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.model.Agenda;
-import com.cinematica.model.Pessoa;
-import com.cinematica.services.AgendaService;
-import com.cinematica.services.PessoaService;
+import com.cinematica.services.agenda.AgendaService;
+import com.cinematica.services.pessoa.PessoaService;
 
 /**
  * AgendaResource
@@ -49,7 +49,7 @@ public class AgendaResource implements Serializable {
     
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> buscarAgendaPorIdPaciente(@PathVariable Integer id) {
-        Pessoa entidadePessoa = pessoaService.buscarPorId(id);
+        PessoaDTO entidadePessoa = pessoaService.buscarPorId(id);
         Long idPaciente = Long.valueOf(entidadePessoa.getId());
         Agenda entidade = agendaService.buscarAgendaPorIdPaciente(idPaciente);
         return ResponseEntity.ok().body(entidade);
