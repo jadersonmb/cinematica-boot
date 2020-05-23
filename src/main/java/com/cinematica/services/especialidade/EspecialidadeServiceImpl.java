@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.EspecialidadeDTO;
@@ -56,6 +59,13 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 		especialidadeRepository.delete(mapper.toEspecialidade(entidade));
 	}
 
+	@Override
+	public Page<EspecialidadeDTO> listarTodosPages(Integer page, Integer linePage, String orderBy, String direction) throws EspecialidadeException {
+		Page<Especialidade> listaEspecialidades = especialidadeRepository.findAll(PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy));
+		Page<EspecialidadeDTO> listaEspecialidadesDTO = listaEspecialidades.map(obj -> mapper.toEspecialidadeDTO(obj));
+		return listaEspecialidadesDTO;
+	}
+	
 	public List<EspecialidadeDTO> listarTodos() throws EspecialidadeException {
 		List<Especialidade> listaEspecialidades = especialidadeRepository.findAll();
 		List<EspecialidadeDTO> listaEspecialidadesDTO = new ArrayList<>();
@@ -88,5 +98,6 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 					.verificarSeCampoEstaNulo(entidade.getDescricao(), "erro_descricao_nao_pode_ser_nula").toString());
 		}
 	}
+
 
 }
