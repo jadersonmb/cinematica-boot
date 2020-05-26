@@ -15,6 +15,14 @@ public class EspecialidadeDTO {
 	@NotNull(message = "Campo Obrigatório")
 	private String descricao;
 	private SimNao ativo = SimNao.Sim;
+	
+	public EspecialidadeDTO() {
+	}
+
+	public EspecialidadeDTO(Integer id) {
+		super();
+		this.id = id;
+	}
 
 	public Integer getId() {
 		return id;

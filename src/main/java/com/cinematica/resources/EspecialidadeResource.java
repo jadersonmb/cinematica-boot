@@ -90,6 +90,12 @@ public class EspecialidadeResource implements Serializable {
 		return ResponseEntity.ok().build();
 	}
 	
+	@RequestMapping(value = "/deleteList/{ids}", method=RequestMethod.DELETE)
+	public ResponseEntity<?> deleteList(@PathVariable List<Integer> ids) {
+		especialidadeService.deleteList(ids);
+		return ResponseEntity.ok().build();
+	}
+	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody EspecialidadeDTO entidadeDTO) {
 		EspecialidadeDTO entidadeSalvaDTO = especialidadeService.buscarPorId(id);

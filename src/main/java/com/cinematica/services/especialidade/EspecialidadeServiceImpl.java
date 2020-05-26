@@ -91,6 +91,11 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 			throw new EspecialidadeException("existem_consultas_que_utilizam_esta_especialidade");
 		}
 	}
+	
+	@Override
+	public void deleteList(List<Integer> ids) throws EspecialidadeException {
+		ids.forEach(obj -> delete(new EspecialidadeDTO(obj)));
+	}
 
 	public void verificarCamposObrigatorios(EspecialidadeDTO entidade) throws EspecialidadeException {
 		if (VerificadorUtil.estaNuloOuVazio(entidade.getDescricao())) {
@@ -98,6 +103,5 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 					.verificarSeCampoEstaNulo(entidade.getDescricao(), "erro_descricao_nao_pode_ser_nula").toString());
 		}
 	}
-
 
 }
