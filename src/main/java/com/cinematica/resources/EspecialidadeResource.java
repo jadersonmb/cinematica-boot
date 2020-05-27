@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -97,10 +96,10 @@ public class EspecialidadeResource implements Serializable {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody EspecialidadeDTO entidadeDTO) {
-		EspecialidadeDTO entidadeSalvaDTO = especialidadeService.buscarPorId(id);
+	public ResponseEntity<?> atualizar(@PathVariable String id, @RequestBody EspecialidadeDTO entidadeDTO) {
+		EspecialidadeDTO entidadeSalvaDTO = especialidadeService.buscarPorId(Integer.valueOf(id));
 		if(VerificadorUtil.naoEstaNulo(entidadeSalvaDTO.getId())) {
-			BeanUtils.copyProperties(entidadeDTO, entidadeSalvaDTO, "id");
+			entidadeSalvaDTO.setDescricao(entidadeDTO.getDescricao());
 			especialidadeService.salvar(entidadeSalvaDTO);
 		}
 		return ResponseEntity.ok().build();
