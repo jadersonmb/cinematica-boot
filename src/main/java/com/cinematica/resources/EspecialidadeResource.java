@@ -61,7 +61,7 @@ public class EspecialidadeResource implements Serializable {
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<?> listarTodosPage(
 			@RequestParam(value="page", defaultValue="0") Integer page,
-			@RequestParam(value="linePage", defaultValue="24") Integer linePage,
+			@RequestParam(value="linePage", defaultValue="10") Integer linePage,
 			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy,
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
 		Page<EspecialidadeDTO> listaEspecialidadeDTO = especialidadeService.listarTodosPages(page, linePage, orderBy, direction);
