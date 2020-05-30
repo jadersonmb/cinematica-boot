@@ -25,6 +25,8 @@ public interface EspecialidadeService {
 	
 	public Page<EspecialidadeDTO> listarTodosPages(Integer page, Integer linePage, String orderBy, String direction) throws EspecialidadeException;
 	
+	public Page<EspecialidadeDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy, String direction) throws EspecialidadeException;
+	
 	public void deleteList(List<Integer> ids) throws EspecialidadeException;
 }
 

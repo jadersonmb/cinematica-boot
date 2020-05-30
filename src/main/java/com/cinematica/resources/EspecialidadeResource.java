@@ -63,11 +63,15 @@ public class EspecialidadeResource implements Serializable {
 			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linePage", defaultValue="10") Integer linePage,
 			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy,
-			@RequestParam(value="direction", defaultValue="ASC") String direction) {
-		Page<EspecialidadeDTO> listaEspecialidadeDTO = especialidadeService.listarTodosPages(page, linePage, orderBy, direction);
+			@RequestParam(value="direction", defaultValue="ASC") String direction,
+			@RequestParam(value="searchTerm", defaultValue= "") String searchTerm) {
+		Page<EspecialidadeDTO> listaEspecialidadeDTO = VerificadorUtil.naoEstaVazio(searchTerm)
+				? especialidadeService.search(searchTerm, page, linePage, orderBy, direction)
+				: especialidadeService.listarTodosPages(page, linePage, orderBy, direction);
 		return ResponseEntity.ok().body(listaEspecialidadeDTO);
 	}
-
+	
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
 		EspecialidadeDTO entidade = especialidadeService.buscarPorId(id);

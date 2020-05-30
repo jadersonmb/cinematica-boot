@@ -66,6 +66,13 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 		return listaEspecialidadesDTO;
 	}
 	
+	public Page<EspecialidadeDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy);
+		Page<Especialidade> listaEspecialidades = especialidadeRepository.search(searchTerm.toLowerCase(), pageRequest);
+		Page<EspecialidadeDTO> listaEspecialidadesDTO = listaEspecialidades.map(obj -> mapper.toEspecialidadeDTO(obj));
+		return listaEspecialidadesDTO;
+	}
+	
 	public List<EspecialidadeDTO> listarTodos() throws EspecialidadeException {
 		List<Especialidade> listaEspecialidades = especialidadeRepository.findAll();
 		List<EspecialidadeDTO> listaEspecialidadesDTO = new ArrayList<>();
