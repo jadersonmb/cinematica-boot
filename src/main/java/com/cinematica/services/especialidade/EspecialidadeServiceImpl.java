@@ -40,6 +40,7 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 	@Autowired
 	private EspecialidadeMapper mapper;
 
+	@Override
 	public EspecialidadeDTO buscarPorId(Integer id) throws EspecialidadeException {
 		Optional<Especialidade> obj = especialidadeRepository.findById(id);
 		EspecialidadeDTO especialidadeDTO = mapper
@@ -47,6 +48,7 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 		return especialidadeDTO;
 	}
 
+	@Override
 	public EspecialidadeDTO salvar(EspecialidadeDTO entidadeDTO) throws EspecialidadeException {
 		regrasNegocioSalvar(entidadeDTO);
 		Especialidade entidade = mapper.toEspecialidade(entidadeDTO);
@@ -54,6 +56,7 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 		return mapper.toEspecialidadeDTO(especialidade);
 	}
 
+	@Override
 	public void delete(EspecialidadeDTO entidade) throws EspecialidadeException {
 		regrasNegocioExcluir(entidade);
 		especialidadeRepository.delete(mapper.toEspecialidade(entidade));
@@ -66,13 +69,15 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 		return listaEspecialidadesDTO;
 	}
 	
-	public Page<EspecialidadeDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy, String direction) {
+	@Override
+	public Page<EspecialidadeDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy, String direction) throws EspecialidadeException {
 		PageRequest pageRequest = PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy);
 		Page<Especialidade> listaEspecialidades = especialidadeRepository.search(searchTerm.toLowerCase(), pageRequest);
 		Page<EspecialidadeDTO> listaEspecialidadesDTO = listaEspecialidades.map(obj -> mapper.toEspecialidadeDTO(obj));
 		return listaEspecialidadesDTO;
 	}
 	
+	@Override
 	public List<EspecialidadeDTO> listarTodos() throws EspecialidadeException {
 		List<Especialidade> listaEspecialidades = especialidadeRepository.findAll();
 		List<EspecialidadeDTO> listaEspecialidadesDTO = new ArrayList<>();

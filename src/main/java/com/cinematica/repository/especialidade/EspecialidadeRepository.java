@@ -13,8 +13,7 @@ import com.cinematica.model.Especialidade;
 @Repository
 public interface EspecialidadeRepository extends JpaRepository<Especialidade, Integer>{
 	
-	 @Query("FROM Especialidade e " +
-	           "WHERE LOWER(e.descricao) like %:searchTerm% ")
-	    Page<Especialidade> search(@Param("searchTerm") String searchTerm, Pageable pageable);
+	@Query("FROM Especialidade e " + "WHERE LOWER(e.descricao) like %:searchTerm% ")
+	Page<Especialidade> search(@Param("searchTerm") String searchTerm, Pageable pageable);
 
 }

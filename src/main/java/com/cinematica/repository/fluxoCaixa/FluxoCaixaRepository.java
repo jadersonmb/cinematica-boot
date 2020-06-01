@@ -1,5 +1,7 @@
 package com.cinematica.repository.fluxoCaixa;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,4 +14,8 @@ public interface FluxoCaixaRepository extends JpaRepository<FluxoCaixa, Long>, F
 
 	@Query("FROM FluxoCaixa f WHERE f.formaPagamento.id = :id")
 	Long verificaAgendaSeExisteFluxoPorPagamento (@Param("id") Integer idPagamento); 
+	
+	@Query(" FROM FluxoCaixa f WHERE f.pessoa.id = :id")
+	List<FluxoCaixa> consultarFluxoPorPacienteId(@Param("id") Integer idPessoa);
+
 }

@@ -19,4 +19,7 @@ public interface AgendaRepository extends JpaRepository<Agenda, Long>, AgendaRep
 
     @Query("SELECT count(id) FROM Agenda a WHERE a.especialidade.id = ?1")
 	Integer consultarSeExisteEspecialidade(Integer idEspecialidade);
+
+    @Query("SELECT count(id) FROM Agenda a WHERE a.horario.id = ?1")
+	Integer consultarSeExisteHorario(Integer entidade);
 }

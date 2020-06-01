@@ -5,10 +5,10 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,12 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.cinematica.dto.HorarioDTO;
-import com.cinematica.exception.EspecialidadeException;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
+import com.cinematica.exception.HorarioException;
 import com.cinematica.framework.util.VerificadorUtil;
 import com.cinematica.services.horario.HorarioService;
 
@@ -43,9 +44,21 @@ public class HorarioResource implements Serializable {
 	@Autowired
 	private MessageSource messageSource;
 
-	@GetMapping
 	public ResponseEntity<?> listarTodos() {
 		List<HorarioDTO> listaEspecialidadeDTO = horarioService.listarTodos();
+		return ResponseEntity.ok().body(listaEspecialidadeDTO);
+	}
+	
+	@GetMapping
+	public ResponseEntity<?> listarTodosPage(
+			@RequestParam(value="page", defaultValue="0") Integer page,
+			@RequestParam(value="linePage", defaultValue="10") Integer linePage,
+			@RequestParam(value="orderBy", defaultValue="horarioInicio") String orderBy,
+			@RequestParam(value="direction", defaultValue="ASC") String direction,
+			@RequestParam(value="searchTerm", defaultValue= "") String searchTerm) {
+		Page<HorarioDTO> listaEspecialidadeDTO = VerificadorUtil.naoEstaVazio(searchTerm)
+				? horarioService.search(searchTerm, page, linePage, orderBy, direction)
+				: horarioService.listarTodosPages(page, linePage, orderBy, direction);
 		return ResponseEntity.ok().body(listaEspecialidadeDTO);
 	}
 
@@ -74,14 +87,15 @@ public class HorarioResource implements Serializable {
 	public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody HorarioDTO entidadeDTO) {
 		HorarioDTO entidadeSalvaDTO = horarioService.buscarPorId(id);
 		if(VerificadorUtil.naoEstaNulo(entidadeSalvaDTO.getId())) {
-			BeanUtils.copyProperties(entidadeDTO, entidadeSalvaDTO, "id");
+			entidadeSalvaDTO.setHorarioInicio(entidadeDTO.getHorarioInicio());
+			entidadeSalvaDTO.setHorarioFim(entidadeDTO.getHorarioFim());
 			horarioService.salvar(entidadeSalvaDTO);
 		}
 		return ResponseEntity.ok().build();
 	}
 	
 	@ExceptionHandler({ com.cinematica.exception.HorarioException.class })
-	public ResponseEntity<Object> HorarioException(EspecialidadeException ex) {
+	public ResponseEntity<Object> HorarioException(HorarioException ex) {
 		String mensagemUsuario = "";
 		String[] split = ex.getMessage().split(";");
 		for (String exMessage : split) {

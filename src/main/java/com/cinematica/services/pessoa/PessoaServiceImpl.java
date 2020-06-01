@@ -16,6 +16,7 @@ import com.cinematica.model.Agenda;
 import com.cinematica.model.Pessoa;
 import com.cinematica.model.Usuario;
 import com.cinematica.repository.agenda.AgendaRepository;
+import com.cinematica.repository.fluxoCaixa.FluxoCaixaRepository;
 import com.cinematica.repository.pessoa.PessoaRepository;
 import com.cinematica.repository.usuario.UsuarioRepository;
 
@@ -33,6 +34,8 @@ public class PessoaServiceImpl implements PessoaService, Serializable {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private AgendaRepository agendaRepository;
+    @Autowired
+    private FluxoCaixaRepository FluxoCaixaRepository;
     @Autowired
     private PessoaMapper mapper;
 
@@ -82,7 +85,7 @@ public class PessoaServiceImpl implements PessoaService, Serializable {
 	}
 
 	private void verificarSeExisteFluxoCaixa(PessoaDTO entidade) throws PessoaException {
-		if (VerificadorUtil.colecaoNaoEstaNulaNemVazio(this.pessoaRepository.consultarFluxoPorPacienteId(entidade.getId()))) {
+		if (VerificadorUtil.colecaoNaoEstaNulaNemVazio(this.FluxoCaixaRepository.consultarFluxoPorPacienteId(entidade.getId()))) {
 			throw new PessoaException("erro_impossivel_excluir_paciente_existe_lancamentos_para_o_paciente");
 		}
 	}

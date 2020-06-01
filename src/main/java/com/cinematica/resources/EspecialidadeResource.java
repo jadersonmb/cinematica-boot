@@ -52,13 +52,12 @@ public class EspecialidadeResource implements Serializable {
 	@Autowired
 	private MessageSource messageSource;
 
-	@GetMapping
 	public ResponseEntity<?> listarTodos() {
 		List<EspecialidadeDTO> listaEspecialidadeDTO = especialidadeService.listarTodos();
 		return ResponseEntity.ok().body(listaEspecialidadeDTO);
 	}
 	
-	@RequestMapping(value="/page", method=RequestMethod.GET)
+	@GetMapping
 	public ResponseEntity<?> listarTodosPage(
 			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linePage", defaultValue="10") Integer linePage,

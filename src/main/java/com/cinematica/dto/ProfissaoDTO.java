@@ -4,11 +4,18 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 /**
  * 
  * @author Jaderson Morais
  *
  */
+@Data
+@AllArgsConstructor
+@RequiredArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProfissaoDTO implements Serializable {
 
@@ -20,20 +27,8 @@ public class ProfissaoDTO implements Serializable {
 	private Long id;
 	private String descricao;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
+	public ProfissaoDTO(Long id) {
+		super();
 		this.id = id;
 	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 }
