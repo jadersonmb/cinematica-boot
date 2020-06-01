@@ -69,7 +69,7 @@ public class HorarioServiceImpl implements HorarioService, Serializable {
 
 	private void verificaSeExisteHorarioNaAgenda(HorarioDTO entidade) throws HorarioException {
 		Integer numbers = agendaRepository.consultarSeExisteHorario(entidade.getId());
-		if (numbers > 0) {
+		if (VerificadorUtil.naoEstaNulo(numbers) && numbers > 0) {
 			throw new HorarioException("impossivel_excluir_usuario_existem_consultas_marcadas");
 		}
 	}

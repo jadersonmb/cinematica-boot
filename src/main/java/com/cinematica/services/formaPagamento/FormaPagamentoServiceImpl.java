@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.FormaPagamentoDTO;
-import com.cinematica.exception.EspecialidadeException;
 import com.cinematica.exception.FormaPagamentoException;
 import com.cinematica.framework.util.Utils;
 import com.cinematica.framework.util.VerificadorUtil;
@@ -61,8 +63,8 @@ public class FormaPagamentoServiceImpl implements FormaPagamentoService, Seriali
 	
 	private void verificaSeExisteFluxoCaixaCadastrado(FormaPagamentoDTO entidade) throws FormaPagamentoException {
 		Long numbers = this.fluxoCaixaRepository.verificaAgendaSeExisteFluxoPorPagamento(entidade.getId());
-		if (numbers > 0) {
-			throw new EspecialidadeException("existem_consultas_que_utilizam_esta_especialidade");
+		if (VerificadorUtil.naoEstaNulo(numbers) && numbers > 0) {
+			throw new FormaPagamentoException("existem_consultas_que_utilizam_esta_especialidade");
 		}
 	}
 
@@ -71,6 +73,27 @@ public class FormaPagamentoServiceImpl implements FormaPagamentoService, Seriali
 		List<FormaPagamentoDTO> listaFormaPagamentoDTO = new ArrayList<>();
 		listaFormaPagamentos.forEach(p-> listaFormaPagamentoDTO.add(mapper.toFormaPagamentoDTO(p)));
 		return  listaFormaPagamentoDTO;
+	}
+	
+	@Override
+	public void deleteList(List<Long> ids) throws FormaPagamentoException {
+		ids.forEach(obj -> delete(new FormaPagamentoDTO(obj)));
+	}
+
+	@Override
+	public Page<FormaPagamentoDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy,
+			String direction) throws FormaPagamentoException {
+		PageRequest pageRequest = PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy);
+		Page<FormaPagamento> listaFormaPagamentos = formaPagamentoRepository.search(searchTerm.toLowerCase(), pageRequest);
+		Page<FormaPagamentoDTO> listaFormaPagamentosDTO = listaFormaPagamentos.map(obj -> mapper.toFormaPagamentoDTO(obj));
+		return listaFormaPagamentosDTO;
+	}
+
+	@Override
+	public Page<FormaPagamentoDTO> listarTodosPages(Integer page, Integer linePage, String orderBy, String direction)  throws FormaPagamentoException{
+		Page<FormaPagamento> listaFormaPagamentos = formaPagamentoRepository.findAll(PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy));
+		Page<FormaPagamentoDTO> listaFormaPagamentosDTO = listaFormaPagamentos.map(obj -> mapper.toFormaPagamentoDTO(obj));
+		return listaFormaPagamentosDTO;
 	}
 	
 	public void verificarCamposObrigatorios(FormaPagamentoDTO entidade) throws FormaPagamentoException {

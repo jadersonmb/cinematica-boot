@@ -99,7 +99,7 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 
 	private void verificaAgendaSeExisteEspecialidade(EspecialidadeDTO entidade) throws EspecialidadeException {
 		Integer numbers = this.agendaRepository.consultarSeExisteEspecialidade(entidade.getId());
-		if (numbers > 0) {
+		if (VerificadorUtil.naoEstaNulo(numbers) && numbers > 0) {
 			throw new EspecialidadeException("existem_consultas_que_utilizam_esta_especialidade");
 		}
 	}

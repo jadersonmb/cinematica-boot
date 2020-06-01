@@ -13,7 +13,7 @@ import com.cinematica.model.FluxoCaixa;
 public interface FluxoCaixaRepository extends JpaRepository<FluxoCaixa, Long>, FluxoCaiaxRepositoryCustom {
 
 	@Query("FROM FluxoCaixa f WHERE f.formaPagamento.id = :id")
-	Long verificaAgendaSeExisteFluxoPorPagamento (@Param("id") Integer idPagamento); 
+	Long verificaAgendaSeExisteFluxoPorPagamento (@Param("id") Long idPagamento); 
 	
 	@Query(" FROM FluxoCaixa f WHERE f.pessoa.id = :id")
 	List<FluxoCaixa> consultarFluxoPorPacienteId(@Param("id") Integer idPessoa);
