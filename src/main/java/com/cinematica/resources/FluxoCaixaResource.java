@@ -60,12 +60,9 @@ public class FluxoCaixaResource implements Serializable {
 	public ResponseEntity<?> listarTodosPage(
 			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linePage", defaultValue="10") Integer linePage,
-			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy,
-			@RequestParam(value="direction", defaultValue="ASC") String direction,
-			@RequestParam(value="searchTerm", defaultValue= "") String searchTerm) {
-		Page<FluxoCaixaDTO> listaFormaPagamentosDTO = VerificadorUtil.naoEstaVazio(searchTerm)
-				? fluxoCaixaService.search(searchTerm, page, linePage, orderBy, direction)
-				: fluxoCaixaService.listarTodosPages(page, linePage, orderBy, direction);
+			@RequestParam(value="orderBy", defaultValue="dataLancamento") String orderBy,
+			@RequestParam(value="direction", defaultValue="DESC") String direction) {
+		Page<FluxoCaixaDTO> listaFormaPagamentosDTO = fluxoCaixaService.listarTodosPages(page, linePage, orderBy, direction);
 		return ResponseEntity.ok().body(listaFormaPagamentosDTO);
 	}
 

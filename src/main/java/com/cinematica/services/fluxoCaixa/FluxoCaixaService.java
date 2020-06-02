@@ -23,8 +23,6 @@ public interface FluxoCaixaService {
 
 	public List<FluxoCaixaDTO> listarTodos() throws FluxoCaixaException;
 
-	public Page<FluxoCaixaDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy, String direction) throws FluxoCaixaException;
-
 	public Page<FluxoCaixaDTO> listarTodosPages(Integer page, Integer linePage, String orderBy, String direction) throws FluxoCaixaException;
 
 	public void deleteList(List<Long> ids) throws FluxoCaixaException;

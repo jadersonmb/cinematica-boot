@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.FluxoCaixaDTO;
@@ -31,6 +34,10 @@ public class FluxoCaixaServiceImpl implements FluxoCaixaService, Serializable {
 	private FluxoCaixaRepository fluxoCaixaRepository;
 	@Autowired
 	private FluxoCaixaMapper mapper;
+	
+	private void regrasNegocioSalvar(FluxoCaixaDTO entidade) throws FluxoCaixaException {
+		verificarCamposObrigatorios(entidade);
+	}
 
 	public FluxoCaixaDTO buscarPorId(Long id) throws FluxoCaixaException {
 		Optional<FluxoCaixa> obj = fluxoCaixaRepository.findById(id);
@@ -43,8 +50,8 @@ public class FluxoCaixaServiceImpl implements FluxoCaixaService, Serializable {
 
 	public FluxoCaixaDTO salvar(FluxoCaixaDTO entidadeDTO) throws FluxoCaixaException {
 		
-		verificarCamposObrigatorios(entidadeDTO);
-
+		regrasNegocioSalvar(entidadeDTO);
+		
 		FluxoCaixa entidade = mapper.toFluxoCaixa(entidadeDTO);
 		FluxoCaixa fluxoCaixa = fluxoCaixaRepository.save(entidade);
 		return mapper.toFluxoCaixaDTO(fluxoCaixa);
@@ -73,5 +80,17 @@ public class FluxoCaixaServiceImpl implements FluxoCaixaService, Serializable {
 		}
 	}
 
+	@Override
+	public Page<FluxoCaixaDTO> listarTodosPages(Integer page, Integer linePage, String orderBy, String direction)
+			throws FluxoCaixaException {
+		Page<FluxoCaixa> listaFluxoCaixa = fluxoCaixaRepository.findAll(PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy));
+		Page<FluxoCaixaDTO> listaFluxoCaixaDTO = listaFluxoCaixa.map(obj -> mapper.toFluxoCaixaDTO(obj));
+		return listaFluxoCaixaDTO;
+	}
+
+	@Override
+	public void deleteList(List<Long> ids) throws FluxoCaixaException {
+		ids.forEach(obj -> delete(new FluxoCaixaDTO(obj)));
+	}
 
 }

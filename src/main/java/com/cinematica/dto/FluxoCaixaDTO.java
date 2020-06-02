@@ -31,6 +31,13 @@ public class FluxoCaixaDTO implements Serializable {
 	private PessoaDTO pessoa;
 	private String numeroRecibo;
 	private Integer quantidadeParcela;
+	
+	public FluxoCaixaDTO(){
+	}
+
+	public FluxoCaixaDTO(Long id) {
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;
