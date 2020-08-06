@@ -3,6 +3,7 @@ package com.cinematica.services.especialidade;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.EspecialidadeDTO;
@@ -21,9 +22,7 @@ public interface EspecialidadeService {
 
 	public void delete(EspecialidadeDTO entidadeDTO) throws EspecialidadeException;
 
-	public List<EspecialidadeDTO> listarTodos() throws EspecialidadeException;
-	
-	public Page<EspecialidadeDTO> listarTodosPages(Integer page, Integer linePage, String orderBy, String direction) throws EspecialidadeException;
+	public Page<EspecialidadeDTO> listarTodos(Pageable pageable, EspecialidadeFilterDTO filter) throws EspecialidadeException;
 	
 	public Page<EspecialidadeDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy, String direction) throws EspecialidadeException;
 	

@@ -22,9 +22,7 @@ public interface FluxoCaixaService {
 
 	public void delete(FluxoCaixaDTO entidadeDTO) throws FluxoCaixaException;
 
-	public List<FluxoCaixaDTO> listarTodos() throws FluxoCaixaException;
-
-	public Page<FluxoCaixaDTO> listarTodosPages(Pageable pageable) throws FluxoCaixaException;
+	public Page<FluxoCaixaDTO> listarTodosPages(Pageable pageable, FluxoCaixaFilterDTO filter) throws FluxoCaixaException;
 
 	public void deleteList(List<Long> ids) throws FluxoCaixaException;
 

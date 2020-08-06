@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,15 +21,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.cinematica.dto.ComboDTO;
 import com.cinematica.dto.FormaPagamentoDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.FormaPagamentoException;
 import com.cinematica.framework.util.VerificadorUtil;
+import com.cinematica.services.formaPagamento.FormaPagamentoFilterDTO;
 import com.cinematica.services.formaPagamento.FormaPagamentoService;
 
 @RestController
@@ -46,28 +46,10 @@ public class FormaPagamentoResource implements Serializable {
 	@Autowired
 	private MessageSource messageSource;
 
-	public ResponseEntity<?> listarTodos() {
-		List<FormaPagamentoDTO> listaFormaPagamentosDTO = formaPagamentoService.listarTodos();
-		return ResponseEntity.ok().body(listaFormaPagamentosDTO);
-	}
-	
 	@GetMapping
-	public ResponseEntity<?> listarTodosPage(
-			@RequestParam(value="page", defaultValue="0") Integer page,
-			@RequestParam(value="linePage", defaultValue="10") Integer linePage,
-			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy,
-			@RequestParam(value="direction", defaultValue="ASC") String direction,
-			@RequestParam(value="searchTerm", defaultValue= "") String searchTerm) {
-		Page<FormaPagamentoDTO> listaFormaPagamentosDTO = VerificadorUtil.naoEstaVazio(searchTerm)
-				? formaPagamentoService.search(searchTerm, page, linePage, orderBy, direction)
-				: formaPagamentoService.listarTodosPages(page, linePage, orderBy, direction);
+	public ResponseEntity<?> listarTodos(Pageable pageable, FormaPagamentoFilterDTO filter) {
+		Page<FormaPagamentoDTO> listaFormaPagamentosDTO = formaPagamentoService.listarTodos(pageable, filter);
 		return ResponseEntity.ok().body(listaFormaPagamentosDTO);
-	}
-	
-	@GetMapping(value = "/selectFormaDePagamentos")
-	public ResponseEntity<?> buscarFormaDePagamentosParaSelect() {
-		List<ComboDTO> entidade = formaPagamentoService.listarSelectTodos();
-		return ResponseEntity.ok().body(entidade);
 	}
 
 	@GetMapping(value = "/{id}")

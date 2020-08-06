@@ -29,6 +29,7 @@ import com.cinematica.dto.FluxoCaixaDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.FluxoCaixaException;
 import com.cinematica.framework.util.VerificadorUtil;
+import com.cinematica.services.fluxoCaixa.FluxoCaixaFilterDTO;
 import com.cinematica.services.fluxoCaixa.FluxoCaixaService;
 
 /**
@@ -51,14 +52,9 @@ public class FluxoCaixaResource implements Serializable {
 	@Autowired
 	private MessageSource messageSource;
 
-	public ResponseEntity<?> listarTodos() {
-		List<FluxoCaixaDTO> listaFluxoCaixaDTO = fluxoCaixaService.listarTodos();
-		return ResponseEntity.ok().body(listaFluxoCaixaDTO);
-	}
-	
 	@GetMapping
-	public ResponseEntity<?> listarTodosPage(Pageable pageable) {
-		Page<FluxoCaixaDTO> listaFormaPagamentosDTO = fluxoCaixaService.listarTodosPages(pageable);
+	public ResponseEntity<?> listarTodosPage(Pageable pageable, FluxoCaixaFilterDTO filter) {
+		Page<FluxoCaixaDTO> listaFormaPagamentosDTO = fluxoCaixaService.listarTodosPages(pageable, filter);
 		return ResponseEntity.ok().body(listaFormaPagamentosDTO);
 	}
 

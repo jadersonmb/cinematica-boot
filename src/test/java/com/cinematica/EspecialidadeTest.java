@@ -3,8 +3,6 @@ package com.cinematica;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +40,6 @@ public class EspecialidadeTest extends CinematicaApplicationTests {
             .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
-    @Test
-    public void testListaTodos() {
-        List<EspecialidadeDTO> list = especialidadeService.listarTodos();
-        assertTrue(!list.isEmpty());
-    }
-    
     @Test
     public void testEspecialidadeID() {
     	EspecialidadeDTO dto = especialidadeService.buscarPorId(1);

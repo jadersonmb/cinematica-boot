@@ -80,10 +80,10 @@ public class FluxoCaixaServiceImpl implements FluxoCaixaService, Serializable {
 	}
 
 	@Override
-	public Page<FluxoCaixaDTO> listarTodosPages(Pageable pageable)
+	public Page<FluxoCaixaDTO> listarTodosPages(Pageable pageable, FluxoCaixaFilterDTO filter)
 			throws FluxoCaixaException {
 		Page<FluxoCaixa> listaFluxoCaixa = fluxoCaixaRepository.findAll(pageable);
-		Page<FluxoCaixaDTO> listaFluxoCaixaDTO = listaFluxoCaixa.map(obj -> mapper.toFluxoCaixaDTO(obj));
+		Page<FluxoCaixaDTO> listaFluxoCaixaDTO = listaFluxoCaixa.map(mapper::toFluxoCaixaDTO);
 		return listaFluxoCaixaDTO;
 	}
 

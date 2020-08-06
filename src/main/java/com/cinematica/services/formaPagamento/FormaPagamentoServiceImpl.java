@@ -3,15 +3,16 @@ package com.cinematica.services.formaPagamento;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import javax.persistence.criteria.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.cinematica.dto.ComboDTO;
 import com.cinematica.dto.FormaPagamentoDTO;
 import com.cinematica.exception.FormaPagamentoException;
 import com.cinematica.framework.util.Utils;
@@ -69,11 +70,16 @@ public class FormaPagamentoServiceImpl implements FormaPagamentoService, Seriali
 		}
 	}
 
-	public List<FormaPagamentoDTO> listarTodos() throws FormaPagamentoException {
-		List<FormaPagamento> listaFormaPagamentos = formaPagamentoRepository.findAll();
-		List<FormaPagamentoDTO> listaFormaPagamentoDTO = new ArrayList<>();
-		listaFormaPagamentos.forEach(p-> listaFormaPagamentoDTO.add(mapper.toFormaPagamentoDTO(p)));
-		return  listaFormaPagamentoDTO;
+	public Page<FormaPagamentoDTO> listarTodos(Pageable pageable, FormaPagamentoFilterDTO filter)
+			throws FormaPagamentoException {
+		return formaPagamentoRepository.findAll((root, query, builder) -> {
+			List<Predicate> predicates = new ArrayList<>();
+			if (Objects.nonNull(filter.getDescricao()) && !filter.getDescricao().isEmpty()) {
+				predicates.add(builder.like(builder.lower(root.<String>get("descricao")),
+						"%".concat(filter.getDescricao().toLowerCase()).concat("%")));
+			}
+			return builder.and(predicates.toArray(new Predicate[0]));
+		}, pageable).map(mapper::toFormaPagamentoDTO);
 	}
 	
 	@Override
@@ -81,33 +87,10 @@ public class FormaPagamentoServiceImpl implements FormaPagamentoService, Seriali
 		ids.forEach(obj -> delete(new FormaPagamentoDTO(obj)));
 	}
 
-	@Override
-	public Page<FormaPagamentoDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy,
-			String direction) throws FormaPagamentoException {
-		PageRequest pageRequest = PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy);
-		Page<FormaPagamento> listaFormaPagamentos = formaPagamentoRepository.search(searchTerm.toLowerCase(), pageRequest);
-		Page<FormaPagamentoDTO> listaFormaPagamentosDTO = listaFormaPagamentos.map(obj -> mapper.toFormaPagamentoDTO(obj));
-		return listaFormaPagamentosDTO;
-	}
-
-	@Override
-	public Page<FormaPagamentoDTO> listarTodosPages(Integer page, Integer linePage, String orderBy, String direction)  throws FormaPagamentoException{
-		Page<FormaPagamento> listaFormaPagamentos = formaPagamentoRepository.findAll(PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy));
-		Page<FormaPagamentoDTO> listaFormaPagamentosDTO = listaFormaPagamentos.map(obj -> mapper.toFormaPagamentoDTO(obj));
-		return listaFormaPagamentosDTO;
-	}
-	
 	public void verificarCamposObrigatorios(FormaPagamentoDTO entidade) throws FormaPagamentoException {
 		if (VerificadorUtil.estaNuloOuVazio(entidade.getDescricao())) {
 			throw new FormaPagamentoException(Utils
 					.verificarSeCampoEstaNulo(entidade.getDescricao(), "erro_descricao_nao_pode_ser_nula").toString());
 		}
-	}
-
-	@Override
-	public List<ComboDTO> listarSelectTodos() throws FormaPagamentoException {
-		List<ComboDTO> listaCombo = new ArrayList<>();
-		listarTodos().forEach(obj -> listaCombo.add(mapper.toComboDTO(obj)));
-		return listaCombo;
 	}
 }
