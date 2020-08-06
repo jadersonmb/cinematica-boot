@@ -7,8 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.FluxoCaixaDTO;
@@ -81,9 +80,9 @@ public class FluxoCaixaServiceImpl implements FluxoCaixaService, Serializable {
 	}
 
 	@Override
-	public Page<FluxoCaixaDTO> listarTodosPages(Integer page, Integer linePage, String orderBy, String direction)
+	public Page<FluxoCaixaDTO> listarTodosPages(Pageable pageable)
 			throws FluxoCaixaException {
-		Page<FluxoCaixa> listaFluxoCaixa = fluxoCaixaRepository.findAll(PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy));
+		Page<FluxoCaixa> listaFluxoCaixa = fluxoCaixaRepository.findAll(pageable);
 		Page<FluxoCaixaDTO> listaFluxoCaixaDTO = listaFluxoCaixa.map(obj -> mapper.toFluxoCaixaDTO(obj));
 		return listaFluxoCaixaDTO;
 	}

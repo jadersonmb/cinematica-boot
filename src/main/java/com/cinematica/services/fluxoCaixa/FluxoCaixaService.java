@@ -3,6 +3,7 @@ package com.cinematica.services.fluxoCaixa;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.FluxoCaixaDTO;
@@ -23,7 +24,7 @@ public interface FluxoCaixaService {
 
 	public List<FluxoCaixaDTO> listarTodos() throws FluxoCaixaException;
 
-	public Page<FluxoCaixaDTO> listarTodosPages(Integer page, Integer linePage, String orderBy, String direction) throws FluxoCaixaException;
+	public Page<FluxoCaixaDTO> listarTodosPages(Pageable pageable) throws FluxoCaixaException;
 
 	public void deleteList(List<Long> ids) throws FluxoCaixaException;
 

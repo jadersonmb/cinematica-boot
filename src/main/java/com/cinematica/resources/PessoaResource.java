@@ -9,6 +9,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +28,7 @@ import com.cinematica.dto.PessoaDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.PessoaException;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.model.Pessoa;
+import com.cinematica.services.pessoa.PessoaFilterDTO;
 import com.cinematica.services.pessoa.PessoaService;
 
 /**
@@ -45,11 +47,11 @@ public class PessoaResource implements Serializable {
     private MessageSource messageSource;
 
     @GetMapping
-    public ResponseEntity<?> listarTodos() {
-        List<Pessoa> pessoas =  pessoaService.listarTodos();
+    public ResponseEntity<?> listarTodos(Pageable pageable, PessoaFilterDTO filter) {
+        Page<PessoaDTO> pessoas =  pessoaService.listarTodos(pageable, filter);
         return ResponseEntity.ok().body(pessoas);
-    }   
-
+    }
+    
     @GetMapping(value = "/{id}")
     public ResponseEntity<PessoaDTO> buscarPorId(@PathVariable Integer id) {
         PessoaDTO entidade = pessoaService.buscarPorId(id);

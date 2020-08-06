@@ -1,9 +1,6 @@
 package com.cinematica;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -15,7 +12,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.cinematica.dto.PessoaDTO;
-import com.cinematica.model.Pessoa;
 import com.cinematica.resources.PessoaResource;
 import com.cinematica.services.pessoa.PessoaServiceImpl;
 
@@ -52,11 +48,5 @@ public class PessoaTest extends CinematicaApplicationTests {
     public void testConsultarPacientePorID() throws Exception {
         PessoaDTO entidade = pessoaService.buscarPorId(80);
         assertNotNull(entidade.getId());
-    }
-
-    @Test
-    public void testListaTodosPaciente() {
-        List<Pessoa> list = pessoaService.listarTodos();
-        assertTrue(!list.isEmpty());
     }
 }

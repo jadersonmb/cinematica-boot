@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.cinematica.dto.ComboDTO;
 import com.cinematica.dto.FormaPagamentoDTO;
 import com.cinematica.exception.FormaPagamentoException;
 import com.cinematica.framework.util.Utils;
@@ -101,5 +102,12 @@ public class FormaPagamentoServiceImpl implements FormaPagamentoService, Seriali
 			throw new FormaPagamentoException(Utils
 					.verificarSeCampoEstaNulo(entidade.getDescricao(), "erro_descricao_nao_pode_ser_nula").toString());
 		}
+	}
+
+	@Override
+	public List<ComboDTO> listarSelectTodos() throws FormaPagamentoException {
+		List<ComboDTO> listaCombo = new ArrayList<>();
+		listarTodos().forEach(obj -> listaCombo.add(mapper.toComboDTO(obj)));
+		return listaCombo;
 	}
 }

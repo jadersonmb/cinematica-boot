@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.cinematica.dto.ComboDTO;
 import com.cinematica.dto.FormaPagamentoDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.FormaPagamentoException;
@@ -61,6 +62,12 @@ public class FormaPagamentoResource implements Serializable {
 				? formaPagamentoService.search(searchTerm, page, linePage, orderBy, direction)
 				: formaPagamentoService.listarTodosPages(page, linePage, orderBy, direction);
 		return ResponseEntity.ok().body(listaFormaPagamentosDTO);
+	}
+	
+	@GetMapping(value = "/selectFormaDePagamentos")
+	public ResponseEntity<?> buscarFormaDePagamentosParaSelect() {
+		List<ComboDTO> entidade = formaPagamentoService.listarSelectTodos();
+		return ResponseEntity.ok().body(entidade);
 	}
 
 	@GetMapping(value = "/{id}")

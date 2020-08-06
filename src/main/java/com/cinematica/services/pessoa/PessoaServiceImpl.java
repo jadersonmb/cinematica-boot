@@ -1,10 +1,16 @@
 package com.cinematica.services.pessoa;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
+import javax.persistence.criteria.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.PessoaDTO;
@@ -14,6 +20,7 @@ import com.cinematica.framework.util.VerificadorUtil;
 import com.cinematica.mapper.PessoaMapper;
 import com.cinematica.model.Agenda;
 import com.cinematica.model.Pessoa;
+import com.cinematica.model.SimNao;
 import com.cinematica.model.Usuario;
 import com.cinematica.repository.agenda.AgendaRepository;
 import com.cinematica.repository.fluxoCaixa.FluxoCaixaRepository;
@@ -39,9 +46,17 @@ public class PessoaServiceImpl implements PessoaService, Serializable {
     @Autowired
     private PessoaMapper mapper;
 
-    public List<Pessoa> listarTodos() {
-        return pessoaRepository.findAll();
-    }
+	public Page<PessoaDTO> listarTodos(Pageable pageable, PessoaFilterDTO filter) {
+		return pessoaRepository.findAll((root, query, builder) -> {
+			List<Predicate> predicates = new ArrayList<>();
+			if (Objects.nonNull(filter.getNome()) && !filter.getNome().isEmpty()) {
+				predicates.add(builder.like(builder.lower(root.<String>get("nome")),
+						"%".concat(filter.getNome().toLowerCase()).concat("%")));
+			}
+			predicates.add(builder.equal(root.<String>get("ativo"), SimNao.Sim));
+			return builder.and(predicates.toArray(new Predicate[0]));
+		}, pageable).map(mapper::toPessoaDTO);
+	}
 
 	public PessoaDTO buscarPorId(Integer id) throws PessoaException {
 		Optional<Pessoa> obj = pessoaRepository.findById(id);
@@ -103,4 +118,5 @@ public class PessoaServiceImpl implements PessoaService, Serializable {
 			throw new PessoaException(msg.toString());
 		}
 	}
+
 }
