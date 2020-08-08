@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.UsuarioDTO;
 import com.cinematica.exception.UsuarioException;
-import com.cinematica.model.Usuario;
 /**
  * 
  * @author Jaderson Morais
@@ -15,11 +14,11 @@ import com.cinematica.model.Usuario;
 @Service
 public interface UsuarioService {
 	
-	public Usuario consultarPorId(Integer id) throws UsuarioException;
+	public UsuarioDTO consultarPorId(Integer id) throws UsuarioException;
 
-    public UsuarioDTO salvar(Usuario entidade) throws UsuarioException;
+    public UsuarioDTO salvar(UsuarioDTO entidade) throws UsuarioException;
 
-    public void delete(Usuario entidade) throws UsuarioException;
+    public void delete(UsuarioDTO entidade) throws UsuarioException;
 
-	public List<Usuario> listarTodos();
+	public List<UsuarioDTO> listarTodos() throws UsuarioException;
 }

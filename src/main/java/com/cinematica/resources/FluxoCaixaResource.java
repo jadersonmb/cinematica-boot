@@ -29,8 +29,10 @@ import com.cinematica.dto.FluxoCaixaDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.FluxoCaixaException;
 import com.cinematica.framework.util.VerificadorUtil;
+import com.cinematica.services.empresa.EmpresaService;
 import com.cinematica.services.fluxoCaixa.FluxoCaixaFilterDTO;
 import com.cinematica.services.fluxoCaixa.FluxoCaixaService;
+import com.cinematica.services.usuario.UsuarioService;
 
 /**
  * 
@@ -50,6 +52,10 @@ public class FluxoCaixaResource implements Serializable {
 	@Autowired
 	private FluxoCaixaService fluxoCaixaService;
 	@Autowired
+	private EmpresaService empresaService;
+	@Autowired
+	private UsuarioService usuarioService;
+	@Autowired
 	private MessageSource messageSource;
 
 	@GetMapping
@@ -66,7 +72,12 @@ public class FluxoCaixaResource implements Serializable {
 
 	@PostMapping
 	public ResponseEntity<?> salvar(@RequestBody FluxoCaixaDTO entidadeDTO) {
+		//TODO: 
+		entidadeDTO.setEmpresa(empresaService.buscarPorId(1));
+		entidadeDTO.setUsuario(usuarioService.consultarPorId(1));
+		
 		FluxoCaixaDTO fluxoCaixaDTO = fluxoCaixaService.salvar(entidadeDTO);
+		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(fluxoCaixaDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(fluxoCaixaDTO);
 

@@ -1,6 +1,7 @@
 package com.cinematica.services.usuario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,21 +28,26 @@ public class UsuarioServiceImpl implements UsuarioService, Serializable {
     private UsuarioMapper mapper;
     
 
-    public Usuario consultarPorId(Integer id) throws UsuarioException {
+    public UsuarioDTO consultarPorId(Integer id) throws UsuarioException {
         Optional<Usuario> obj = usuarioRepository.findById(id);
-        return obj.orElseThrow(() -> new UsuarioException("Pessoa não Encontrada"));
+        UsuarioDTO usuarioDTO = mapper
+				.toUsuarioDTO(obj.orElseThrow(() -> new UsuarioException("Erro usuário não existe")));
+        return usuarioDTO;
     }
 
-    public UsuarioDTO salvar(Usuario entidade) throws UsuarioException {
-        Usuario usuario = usuarioRepository.save(entidade);
+    public UsuarioDTO salvar(UsuarioDTO entidade) throws UsuarioException {
+        Usuario usuario = usuarioRepository.save(mapper.toUsuario(entidade));
         return mapper.toUsuarioDTO(usuario);
     }
 
-    public void delete(Usuario entidade) throws UsuarioException {
-        usuarioRepository.delete(entidade);
+    public void delete(UsuarioDTO entidade) throws UsuarioException {
+        usuarioRepository.delete(mapper.toUsuario(entidade));
     }
 
-	public List<Usuario> listarTodos() {
-		return usuarioRepository.findAll();
+	public List<UsuarioDTO> listarTodos() {
+		List<Usuario> users = usuarioRepository.findAll();
+		List<UsuarioDTO> usersDTO = new ArrayList<>();
+		users.forEach(p-> usersDTO.add(mapper.toUsuarioDTO(p)));
+		return usersDTO;
 	}
 }

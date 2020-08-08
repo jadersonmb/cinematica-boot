@@ -21,7 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.cinematica.dto.UsuarioDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.UsuarioException;
-import com.cinematica.model.Usuario;
 import com.cinematica.services.usuario.UsuarioService;
 
 /**
@@ -42,18 +41,18 @@ public class UsuarioResourse implements Serializable {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> listarTodos() {
-        List<Usuario> usuario =  usuarioService.listarTodos();
+        List<UsuarioDTO> usuario =  usuarioService.listarTodos();
         return ResponseEntity.ok().body(usuario);
     }   
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
-        Usuario entidade = usuarioService.consultarPorId(id);
+        UsuarioDTO entidade = usuarioService.consultarPorId(id);
         return ResponseEntity.ok().body(entidade);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> salvar(@RequestBody Usuario entidade) {
+    public ResponseEntity<?> salvar(@RequestBody UsuarioDTO entidade) {
         UsuarioDTO usuarioDTO = usuarioService.salvar(entidade);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuarioDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(usuarioDTO);
@@ -61,7 +60,7 @@ public class UsuarioResourse implements Serializable {
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable Integer id) {
-        Usuario entidade = usuarioService.consultarPorId(id);
+        UsuarioDTO entidade = usuarioService.consultarPorId(id);
         usuarioService.delete(entidade);
         return ResponseEntity.ok().build();
     }
