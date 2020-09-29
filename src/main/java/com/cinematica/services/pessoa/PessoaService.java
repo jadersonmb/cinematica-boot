@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.PessoaDTO;
 import com.cinematica.exception.PessoaException;
+import com.cinematica.repository.pessoa.PessoaFilterDTO;
 
 /**
  * 

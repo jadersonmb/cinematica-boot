@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.EspecialidadeDTO;
 import com.cinematica.exception.EspecialidadeException;
+import com.cinematica.repository.especialidade.EspecialidadeFilterDTO;
 
 /**
  * @author Jaderson Morais
@@ -23,8 +24,6 @@ public interface EspecialidadeService {
 	public void delete(EspecialidadeDTO entidadeDTO) throws EspecialidadeException;
 
 	public Page<EspecialidadeDTO> listarTodos(Pageable pageable, EspecialidadeFilterDTO filter) throws EspecialidadeException;
-	
-	public Page<EspecialidadeDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy, String direction) throws EspecialidadeException;
 	
 	public void deleteList(List<Integer> ids) throws EspecialidadeException;
 }

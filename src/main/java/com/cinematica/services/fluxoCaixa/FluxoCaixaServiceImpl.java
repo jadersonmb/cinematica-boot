@@ -15,6 +15,7 @@ import com.cinematica.exception.FluxoCaixaException;
 import com.cinematica.framework.util.Utils;
 import com.cinematica.mapper.FluxoCaixaMapper;
 import com.cinematica.model.FluxoCaixa;
+import com.cinematica.repository.fluxoCaixa.FluxoCaixaFilterDTO;
 import com.cinematica.repository.fluxoCaixa.FluxoCaixaRepository;
 
 /**

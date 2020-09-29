@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.FluxoCaixaDTO;
 import com.cinematica.exception.FluxoCaixaException;
+import com.cinematica.repository.fluxoCaixa.FluxoCaixaFilterDTO;
 
 /**
  * @author Jaderson Morais

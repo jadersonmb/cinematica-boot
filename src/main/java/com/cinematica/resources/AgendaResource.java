@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,6 +23,7 @@ import com.cinematica.dto.PessoaDTO;
 import com.cinematica.exception.AgendaException;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.model.Agenda;
+import com.cinematica.repository.agenda.AgendaFilterDTO;
 import com.cinematica.services.agenda.AgendaService;
 import com.cinematica.services.pessoa.PessoaService;
 
@@ -42,8 +45,8 @@ public class AgendaResource implements Serializable {
 	private MessageSource messageSource;
 
     @GetMapping
-	public ResponseEntity<?> listarTodos() {
-		List<AgendaDTO> listaAgendaDTO = agendaService.listarTodos();
+	public ResponseEntity<?> listarTodos(Pageable pageable, AgendaFilterDTO filter) {
+		Page<AgendaDTO> listaAgendaDTO = agendaService.listarTodos(pageable, filter);
 		return ResponseEntity.ok().body(listaAgendaDTO);
 	}
     

@@ -1,12 +1,8 @@
 package com.cinematica.services.formaPagamento;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-
-import javax.persistence.criteria.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,7 +16,9 @@ import com.cinematica.framework.util.VerificadorUtil;
 import com.cinematica.mapper.FormaPagamentoMapper;
 import com.cinematica.model.FormaPagamento;
 import com.cinematica.repository.fluxoCaixa.FluxoCaixaRepository;
+import com.cinematica.repository.formaPagamento.FormaPagamentoFilterDTO;
 import com.cinematica.repository.formaPagamento.FormaPagamentoRepository;
+import com.cinematica.repository.formaPagamento.FormaPagamentoSpec;
 
 @Service
 public class FormaPagamentoServiceImpl implements FormaPagamentoService, Serializable {
@@ -45,8 +43,8 @@ public class FormaPagamentoServiceImpl implements FormaPagamentoService, Seriali
 	public FormaPagamentoDTO salvar(FormaPagamentoDTO entidadeDTO) throws FormaPagamentoException {
 		regrasNegocioSalvar(entidadeDTO);
 		FormaPagamento entidade = mapper.toFormaPagamento(entidadeDTO);
-		FormaPagamento formaPagamento1 = formaPagamentoRepository.save(entidade);
-		return mapper.toFormaPagamentoDTO(formaPagamento1);
+		FormaPagamento formaPagamento = formaPagamentoRepository.save(entidade);
+		return mapper.toFormaPagamentoDTO(formaPagamento);
 	}
 
 	public void delete(FormaPagamentoDTO entidadeDTO) throws FormaPagamentoException {
@@ -72,14 +70,8 @@ public class FormaPagamentoServiceImpl implements FormaPagamentoService, Seriali
 
 	public Page<FormaPagamentoDTO> listarTodos(Pageable pageable, FormaPagamentoFilterDTO filter)
 			throws FormaPagamentoException {
-		return formaPagamentoRepository.findAll((root, query, builder) -> {
-			List<Predicate> predicates = new ArrayList<>();
-			if (Objects.nonNull(filter.getDescricao()) && !filter.getDescricao().isEmpty()) {
-				predicates.add(builder.like(builder.lower(root.<String>get("descricao")),
-						"%".concat(filter.getDescricao().toLowerCase()).concat("%")));
-			}
-			return builder.and(predicates.toArray(new Predicate[0]));
-		}, pageable).map(mapper::toFormaPagamentoDTO);
+		return formaPagamentoRepository.findAll(FormaPagamentoSpec.searchName(filter), pageable)
+				.map(mapper::toFormaPagamentoDTO);
 	}
 	
 	@Override

@@ -29,8 +29,8 @@ import com.cinematica.dto.FluxoCaixaDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.FluxoCaixaException;
 import com.cinematica.framework.util.VerificadorUtil;
+import com.cinematica.repository.fluxoCaixa.FluxoCaixaFilterDTO;
 import com.cinematica.services.empresa.EmpresaService;
-import com.cinematica.services.fluxoCaixa.FluxoCaixaFilterDTO;
 import com.cinematica.services.fluxoCaixa.FluxoCaixaService;
 import com.cinematica.services.usuario.UsuarioService;
 

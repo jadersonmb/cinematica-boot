@@ -30,7 +30,7 @@ import com.cinematica.dto.EspecialidadeDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.EspecialidadeException;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.services.especialidade.EspecialidadeFilterDTO;
+import com.cinematica.repository.especialidade.EspecialidadeFilterDTO;
 import com.cinematica.services.especialidade.EspecialidadeService;
 
 /**
@@ -47,10 +47,8 @@ public class EspecialidadeResource implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	@Autowired
 	private EspecialidadeService especialidadeService;
-	@Autowired
 	private MessageSource messageSource;
 
 	@GetMapping

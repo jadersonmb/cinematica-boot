@@ -1,4 +1,4 @@
-package com.cinematica.services.fluxoCaixa;
+package com.cinematica.repository.fluxoCaixa;
 
 import lombok.Data;
 

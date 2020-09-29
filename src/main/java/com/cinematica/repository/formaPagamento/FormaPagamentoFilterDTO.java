@@ -1,4 +1,4 @@
-package com.cinematica.services.formaPagamento;
+package com.cinematica.repository.formaPagamento;
 
 import lombok.Data;
 

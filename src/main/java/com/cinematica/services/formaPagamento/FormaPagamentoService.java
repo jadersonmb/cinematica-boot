@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.FormaPagamentoDTO;
 import com.cinematica.exception.FormaPagamentoException;
+import com.cinematica.repository.formaPagamento.FormaPagamentoFilterDTO;
 
 @Service
 public interface FormaPagamentoService {

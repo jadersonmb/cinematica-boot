@@ -28,7 +28,7 @@ import com.cinematica.dto.FormaPagamentoDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.FormaPagamentoException;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.services.formaPagamento.FormaPagamentoFilterDTO;
+import com.cinematica.repository.formaPagamento.FormaPagamentoFilterDTO;
 import com.cinematica.services.formaPagamento.FormaPagamentoService;
 
 @RestController

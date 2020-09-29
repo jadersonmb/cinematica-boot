@@ -1,4 +1,4 @@
-package com.cinematica.services.especialidade;
+package com.cinematica.repository.especialidade;
 
 import lombok.Data;
 

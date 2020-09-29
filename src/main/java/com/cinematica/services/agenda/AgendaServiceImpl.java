@@ -6,13 +6,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.AgendaDTO;
 import com.cinematica.exception.AgendaException;
 import com.cinematica.mapper.AgendaMapper;
 import com.cinematica.model.Agenda;
+import com.cinematica.repository.agenda.AgendaFilterDTO;
 import com.cinematica.repository.agenda.AgendaRepository;
+import com.cinematica.repository.agenda.AgendaSpec;
 
 /**
  * AgendaService
@@ -50,10 +54,8 @@ public class AgendaServiceImpl implements AgendaService, Serializable {
 	}
 
 	@Override
-	public List<AgendaDTO> listarTodos() throws AgendaException {
-		List<Agenda> listaAgendas = agendaRepository.findAll();
-		List<AgendaDTO> listaAgendaDTO = new ArrayList<>();
-		listaAgendas.forEach(p-> listaAgendaDTO.add(mapper.toAgendaDTO(p)));
-		return  listaAgendaDTO;
+	public Page<AgendaDTO> listarTodos(Pageable pageable, AgendaFilterDTO filter) throws AgendaException {
+		return agendaRepository.findAll(AgendaSpec.searchDesc(filter), pageable)
+				.map(mapper::toAgendaDTO);
 	}
 }

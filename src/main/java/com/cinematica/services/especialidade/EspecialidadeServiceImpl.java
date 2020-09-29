@@ -1,18 +1,12 @@
 package com.cinematica.services.especialidade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-
-import javax.persistence.criteria.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.cinematica.dto.EspecialidadeDTO;
@@ -21,9 +15,10 @@ import com.cinematica.framework.util.Utils;
 import com.cinematica.framework.util.VerificadorUtil;
 import com.cinematica.mapper.EspecialidadeMapper;
 import com.cinematica.model.Especialidade;
-import com.cinematica.model.SimNao;
 import com.cinematica.repository.agenda.AgendaRepository;
+import com.cinematica.repository.especialidade.EspecialidadeFilterDTO;
 import com.cinematica.repository.especialidade.EspecialidadeRepository;
+import com.cinematica.repository.fluxoCaixa.FluxoCaixaSpec;
 
 /**
  * 
@@ -67,24 +62,10 @@ public class EspecialidadeServiceImpl implements EspecialidadeService, Serializa
 	}
 
 	@Override
-	public Page<EspecialidadeDTO> search(String searchTerm, Integer page, Integer linePage, String orderBy, String direction) throws EspecialidadeException {
-		PageRequest pageRequest = PageRequest.of(page, linePage, Direction.valueOf(direction), orderBy);
-		Page<Especialidade> listaEspecialidades = especialidadeRepository.search(searchTerm.toLowerCase(), pageRequest);
-		Page<EspecialidadeDTO> listaEspecialidadesDTO = listaEspecialidades.map(obj -> mapper.toEspecialidadeDTO(obj));
-		return listaEspecialidadesDTO;
-	}
-	
-	@Override
-	public Page<EspecialidadeDTO> listarTodos(Pageable pageable, EspecialidadeFilterDTO filter) throws EspecialidadeException {
-		return especialidadeRepository.findAll((root, query, builder) -> {
-			List<Predicate> predicates = new ArrayList<>();
-			if (Objects.nonNull(filter.getDescricao()) && !filter.getDescricao().isEmpty()) {
-				predicates.add(builder.like(builder.lower(root.<String>get("descricao")),
-						"%".concat(filter.getDescricao().toLowerCase()).concat("%")));
-			}
-			predicates.add(builder.equal(root.<String>get("ativo"), SimNao.Sim));
-			return builder.and(predicates.toArray(new Predicate[0]));
-		},pageable).map(mapper::toEspecialidadeDTO);
+	public Page<EspecialidadeDTO> listarTodos(Pageable pageable, EspecialidadeFilterDTO filter)
+			throws EspecialidadeException {
+		return especialidadeRepository.findAll(FluxoCaixaSpec.searchDesc(filter), pageable)
+				.map(mapper::toEspecialidadeDTO);
 	}
 
 	private void regrasNegocioExcluir(EspecialidadeDTO entidade) throws EspecialidadeException {

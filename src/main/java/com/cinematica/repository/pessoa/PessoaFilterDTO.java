@@ -1,4 +1,4 @@
-package com.cinematica.services.pessoa;
+package com.cinematica.repository.pessoa;
 
 import lombok.Data;
 

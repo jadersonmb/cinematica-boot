@@ -28,7 +28,7 @@ import com.cinematica.dto.PessoaDTO;
 import com.cinematica.exception.CinematicaExceptionHandler.Erro;
 import com.cinematica.exception.PessoaException;
 import com.cinematica.framework.util.VerificadorUtil;
-import com.cinematica.services.pessoa.PessoaFilterDTO;
+import com.cinematica.repository.pessoa.PessoaFilterDTO;
 import com.cinematica.services.pessoa.PessoaService;
 
 /**
